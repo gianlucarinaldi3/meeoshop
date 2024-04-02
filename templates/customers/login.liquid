@@ -1,0 +1,137 @@
+<div id="recover">
+  <div class="section-page-intro">
+    <div class="container">
+      <div class="outer">
+        <div class="inner">
+          <h1 class="h1 title">{{ 'customer.recover_password.title' | t }}</h1>
+          <div class="summary">{{ 'customer.recover_password.subtext' | t }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="login-form-outer">
+      <div class="form">
+        {% form 'recover_customer_password' %}
+          {% assign recover_success = form.posted_successfully? %}
+          {% if form.errors %}
+            <div class="feedback-notice error">
+              <p id="RecoverEmail-email-error">{{ form.errors.messages['form'] }}</p>
+            </div>
+          {% endif %}
+          <div class="field">
+            <input type="email"
+              value=""
+              name="email"
+              id="RecoverEmail"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="{{ 'customer.login_page.email' | t }}"
+            >
+          </div>
+          <div class="form-footer">
+            <button class="button big" type="submit">{{ 'customer.login_page.submit' | t }}</button>
+            <a href="#login" class="to-login">{{ 'customer.login_page.cancel' | t }}</a>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+<div id="login">
+  <div class="section-page-intro">
+    <div class="container">
+      <div class="outer">
+        <div class="inner">
+          <h1 class="h1 title">{{ 'customer.login_page.title' | t }}</h1>
+          <div class="summary">
+            <p><ly-as-724866>Effettua l'accesso per un checkout più rapido e per visualizzare il tuo storico ordini. Se hai già effettuato la registrazione, accedi e inizia a fare acquisti.</ly-as-724866></p>
+            <p><ly-as-724867>Sei un nuovo cliente?</ly-as-724867> <a href="{{ routes.account_register_url }}"><ly-as-724868>Registrati</ly-as-724868></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="login-form-outer">
+      <div class="form">
+        {% if recover_success == true %}
+          <div class="feedback-notice success">
+            <p>{{ 'customer.recover_password.success' | t }}</p>
+          </div>
+        {% endif %}
+        {% form 'customer_login', novalidate: 'novalidate' %}
+          {% if form.errors %}
+            <div class="feedback-notice error">
+              <p><strong><ly-as-724869>Attenzione, si sono verificati i seguenti errori:</ly-as-724869></strong></p>
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+          <div class="fields">
+            <div class="field wide">
+              <input
+                type="email"
+                name="customer[email]"
+                id="CustomerEmail"
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                {% if form.errors contains 'form' %}
+                  aria-invalid="true"
+                {% endif %}
+                placeholder="{{ 'customer.login_page.email' | t }}"
+              >
+            </div>
+            {% if form.password_needed %}
+              <div class="field wide">
+                <input
+                  type="password"
+                  value=""
+                  name="customer[password]"
+                  id="CustomerPassword"
+                  autocomplete="current-password"
+                  {% if form.errors contains 'form' %}
+                    aria-invalid="true"
+                  {% endif %}
+                  placeholder="{{ 'customer.login_page.password' | t }}"
+                >
+              </div>
+            {% endif %}
+          </div>
+          <div class="form-footer">
+            <button class="button" type="submit">{{ 'customer.login_page.sign_in' | t }}</button>
+            {% if form.password_needed %}
+              <a href="#recover" class="to-recover">
+                {{ 'customer.login_page.forgot_password' | t }}
+              </a>
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+      {% if shop.checkout.guest_login %}
+        <div>
+          <hr>
+          <h2 class="h2">{{ 'customer.login_page.guest_title' | t }}</h2>
+          {% form 'guest_login' %}
+            <button class="button">{{ 'customer.login_page.guest_continue' | t }}</button>
+          {% endform %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<script>
+  $(function() {
+    $(".to-login").on("click", function() {
+      $("#login").show();
+      $("#recover").hide();
+      return false;
+    });
+    $(".to-recover").on("click", function() {
+      $("#login").hide();
+      $("#recover").show();
+      return false;
+    });
+  })
+</script>

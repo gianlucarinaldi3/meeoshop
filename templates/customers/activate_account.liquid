@@ -1,0 +1,71 @@
+<div class="section-page-intro">
+  <div class="container">
+    <div class="outer">
+      <div class="inner">
+        <h1 class="h1 title"><ly-as-724863>Attiva l'account</ly-as-724863></h1>
+        <div class="summary">
+          <p><ly-as-724864>Crea una password per attivare il tuo account.</ly-as-724864></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="login-form-outer">
+    <div class="form">
+      {% form 'activate_customer_password' %}
+        {% if form.errors %}
+          <div class="feedback-notice error">
+            <p><strong><ly-as-724865>Attenzione, si sono verificati i seguenti errori:</ly-as-724865></strong></p>
+            <ul>
+              {% for field in form.errors %}
+                <li>
+                  {% if field == 'form' %}
+                    {{ form.errors.messages[field] }}
+                  {% else %}
+                    <a href="#RegisterForm-{{ field }}">
+                      {{ form.errors.translated_fields[field] | capitalize }}
+                      {{ form.errors.messages[field] }}
+                    </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <div class="fields">
+          <div class="field">
+            <input
+              type="password"
+              name="customer[password]"
+              id="password"
+              autocomplete="new-password"
+              placeholder="{{ 'customer.activate_account.password' | t }}"
+              {% if form.errors contains 'password' %}
+                aria-invalid="true"
+                aria-describedby="password-error"
+              {% endif %}
+            >
+          </div>
+
+          <div class="field">
+            <input
+              type="password"
+              name="customer[password_confirmation]"
+              id="password_confirmation"
+              autocomplete="new-password"
+              placeholder="{{ 'customer.activate_account.password_confirm' | t }}"
+              {% if form.errors contains 'password' %}
+                aria-invalid="true"
+                aria-describedby="password_confirmation-error"
+              {% endif %}
+            >
+          </div>
+        </div>
+        <button class="button big">{{ 'customer.activate_account.submit' | t }}</button>
+        <button class="button big alert" name="decline">{{ 'customer.activate_account.cancel' | t }}</button>
+      {% endform %}
+    </div>
+  </div>
+</div>

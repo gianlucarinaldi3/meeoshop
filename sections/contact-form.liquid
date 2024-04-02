@@ -1,0 +1,103 @@
+{% assign contact_title = section.settings.contact_title %}
+{% assign contact_text = section.settings.contact_text %}
+{% assign contact_image = section.settings.contact_image %}
+<div class="container">
+  {% form 'contact', id: 'ContactForm' %}
+    <div class="wrap">
+      <div class="form">
+        {% if form.posted_successfully? %}
+          <div class="feedback-notice success">
+            <p><ly-as-724873>Un membro del nostro staff ti ricontatterà al più presto. Grazie per averci scritto.</ly-as-724873></p>
+          </div>
+        {% elsif form.errors %}
+          <div class="feedback-notice error">
+            <p><strong><ly-as-724874>Attenzione, si sono verificati i seguenti errori:</ly-as-724874></strong></p>
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+        <p class="notice"><ly-as-724875>I campi contrassegnati con * sono obbligatori</ly-as-724875></p>
+        <div class="fields">
+          <div class="field">
+            <input type="text" id="contanct-first-name" name="contact[first_name]" placeholder="Il tuo nome *" required />
+          </div>
+          <div class="field">
+            <input type="text" id="contanct-last-name" name="contact[last_name]" placeholder="Il tuo cognome *" required />
+          </div>
+          <div class="field">
+            <input type="email" id="contanct-email" name="contact[email]" placeholder="Il tuo indirizzo email *" required />
+          </div>
+          <div class="field">
+            <input type="text" id="contanct-phone" name="contact[phone]" placeholder="Il tuo numero di telefono *" required />
+          </div>
+          <div class="field wide">
+            <textarea rows="10" id="contanct-message" name="contact[message]" placeholder="Scrivi qui il tuo messaggio *" required /></textarea>
+          </div>
+          <div class="field wide">
+            <label class="checkbox">
+              <input type="checkbox" id="contact-privacy" name="privacy" required />
+              <span class="label"><ly-as-724876>Ho letto, compreso e accettato la</ly-as-724876> <a href="/pages/privacy-policy" target="_blank"><ly-as-724877>Privacy Policy</ly-as-724877></a>.</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="button big"><ly-as-724878>Invia messaggio</ly-as-724878></button>
+      </div>
+      <div class="contact">
+        <h2 class="h2 title">{{contact_title}}</h2>
+        {{contact_text}}
+        {% if contact_image != blank %}
+          <div class="image">
+            <div class="spacer">
+              <img
+                src="{{ contact_image | img_url: '800x' }}"
+                alt="{{ contact_image.alt | escape }}"
+                loading="lazy"
+                width="800"
+                height="1000"
+              >
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endform %}
+  <script>
+    $(function() {
+      $("#ContactForm").validate();
+    });
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Form contatti",
+  "tag": "div",
+  "class": "main-section section-contact",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Area contatti"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Titolo"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_text",
+      "label": "Testo"
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_image",
+      "label": "Immagine",
+      "info": "Dimensioni consigliate: 800x1000px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Form contatti"
+    }
+  ]
+}
+{% endschema %}

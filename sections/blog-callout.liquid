@@ -1,0 +1,58 @@
+{% assign blog = blogs[section.settings.blog] %}
+{% assign blog_url = '#' %}
+{% if section.settings.blog != 'none' and blog.articles.size > 0 %}
+  {% assign blog_url = blog.url %}
+{% endif %}
+<div class="container">
+  <div class="section-heading">
+    <h2 class="h2 section-title">{{ section.settings.title | escape }}</h2>
+    <div class="section-link">
+      <a href="{{blog_url}}" class="arrow-link">
+        <ly-as-719585>Leggi tutte le storie</ly-as-719585>
+        <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+      </a>
+    </div>
+  </div>
+  <div class="blog-cards-grid">
+    {% for article in blog.articles limit: 3 %}
+      {%
+        render 'blog-post-card',
+        post: article,
+        big: forloop.first
+      %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Dal blog",
+  "class": "main-section section-blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Dal blog",
+      "settings": {
+        "blog": "none"
+      }
+    }
+  ],
+  "templates": [
+    "index",
+    "product"
+  ]
+}
+
+{% endschema %}

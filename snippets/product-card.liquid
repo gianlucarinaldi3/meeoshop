@@ -1,0 +1,44 @@
+{% comment %}
+    Renders a product card
+
+    Accepts:
+    - product: {Object} Product Liquid object (optional)
+    - media_size: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+    - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
+    - add_image_padding: {Boolean} Enables padding on the image to space out the grid
+    - show_vendor: {Boolean} Show the product vendor. Default: false
+    - show_image_outline: {Boolean} Show card outline. Default: true (optional)
+    - show_rating: {Boolean} Show the product rating. Default: false
+
+    Usage:
+    {% render 'product-card', show_vendor: section.settings.show_vendor %}
+{% endcomment %}
+
+<div class="product-card" data-waypoint>
+  <a href="{{ product.url | default: '#' }}">
+    <span class="img img-spacer">
+      {%- if product.featured_media -%}
+        <img src="{{ product.featured_media | image_url: width: 400 }}"
+             alt="{{ product.featured_media.alt | escape }}"
+             width="500" height="500"
+             {% if daud < 3 %}
+               loading="eager"
+             {% else %}
+               loading="lazy"
+             {% endif %}>
+      {%- endif -%}
+      {% if product.variants.size > 1 %}
+        <svg class="variants" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          	<path d="M31.9234 16.2445L23.7742 8.10204C23.6381 7.96599 23.4 7.96599 23.264 8.10204L15.1216 16.2445C15.0535 16.3125 15.0195 16.4009 15.0195 16.4962C15.0195 16.5914 15.0603 16.6798 15.1216 16.7478L23.264 24.8903C23.332 24.9583 23.4273 24.9991 23.5157 24.9991C23.6041 24.9991 23.6994 24.9651 23.7674 24.8903L31.9098 16.7478C32.0595 16.6118 32.0595 16.3873 31.9234 16.2445Z" fill="#385542"/>
+			<path d="M26.4136 16.2445L18.2644 8.10204C18.1284 7.96599 17.8903 7.96599 17.7542 8.10204L9.6118 16.2445C9.54378 16.3125 9.50977 16.4009 9.50977 16.4962C9.50977 16.5914 9.55058 16.6798 9.6118 16.7478L17.7542 24.8903C17.8223 24.9583 17.9175 24.9991 18.0059 24.9991C18.0944 24.9991 18.1896 24.9651 18.2576 24.8903L26.4 16.7478C26.5497 16.6118 26.5497 16.3873 26.4136 16.2445Z" fill="#B83A4B"/>
+			<path d="M20.9039 16.2445L12.7546 8.10204C12.6186 7.96599 12.3805 7.96599 12.2445 8.10204L4.10204 16.2445C4.03401 16.3125 4 16.4009 4 16.4962C4 16.5914 4.04081 16.6798 4.10204 16.7478L12.2445 24.8903C12.3125 24.9583 12.4077 24.9991 12.4962 24.9991C12.5846 24.9991 12.6798 24.9651 12.7478 24.8903L20.8903 16.7478C21.0399 16.6118 21.0399 16.3873 20.9039 16.2445Z" fill="#ECC3B2"/>
+        </svg>
+      {% endif %}
+    </span>
+    <span class="name">{{ product.title }}</span>
+    {% render 'price', product: product, price_class: '', tag: 'span' %}
+    {%- if product.available == false -%}
+      <span class="badge">{{ 'products.product.sold_out' | t }}</span>
+    {%- endif -%}
+  </a>
+</div>

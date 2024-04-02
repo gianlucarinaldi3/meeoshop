@@ -1,0 +1,57 @@
+{%- liquid
+  assign sort_by = search.sort_by | default: search.default_sort_by
+  assign terms = search.terms | escape
+  assign search_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+-%}
+<div class="collection-intro">
+  <div class="container">
+    <div class="outer">
+      <div class="inner">
+        {%- if search.performed -%}
+          <h1 class="h1 title">{{ 'templates.search.title' | t }}</h1>
+        {%- else -%}
+          <h1 class="h1 title">{{ 'general.search.search' | t }}</h1>
+        {%- endif -%}
+        <div class="summary">
+          {%- if search.performed -%}
+            {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
+              {%- if search.results_count > 0 -%}
+                <p role="status">{{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}</p>
+              {%- endif -%}
+            {%- endunless -%}
+            {%- if search.results_count == 0 and search.filters == empty -%}
+              <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- if search.performed -%}
+  <div class="container">
+    {% comment %}
+      <div class="products-grid-heading">
+        <p class="h2 title">{{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}</p>
+      </div>
+    {% endcomment %}
+    {%- if search.results.size == 0 and search.filters != empty -%}
+      <p>Nessun prodotto</p>
+    {%- else -%}
+      <div class="products-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Risultati ricerca",
+  "tag": "div"
+}
+{% endschema %}

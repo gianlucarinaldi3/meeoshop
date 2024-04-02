@@ -1,0 +1,110 @@
+{% comment %}
+ EComposer (https://ecomposer.io)
+ You SHOULD NOT modify source code in this page because
+ It is automatically generated from EComposer
+ {% endcomment %} 
+ 
+ {% assign ecom_root_url = routes.root_url %}
+ {% if ecom_root_url != '/'%}
+ {% assign ecom_root_url = routes.root_url | append: '/' %}
+ {% endif %}
+ <link rel="stylesheet" media="print" onload="this.media='all'" id="ecom-vendors-modal_css" href="https://cdn.ecomposer.app/vendors/css/ecom_modal.css" /><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.4" /><noscript><link rel="stylesheet" media="all" onload="this.media='all'" id="ecom-vendors-modal_css" href="https://cdn.ecomposer.app/vendors/css/ecom_modal.css" /><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.4" /></noscript><script type="text/javascript" asyc="async" id="ecom-vendors-modal_js" src="https://cdn.ecomposer.app/vendors/js/ecom_modal.js" ></script>
+{%capture section_id %}ecom-try-subscribe-page{% endcapture%}{% if section and section_id == section.id and headless == true %}
+{{ content_for_header }}
+{% render 'ecom_header', ECOM_THEME: true %}{% endif %}<link href="https://fonts.googleapis.com/css?family=Commissioner:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Fraunces:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/>
+{{'ecom-647cd91badd9ba57d501b772.css' | asset_url | stylesheet_tag }}
+<script src="{{'ecom-647cd91badd9ba57d501b772.js' | asset_url }}" defer="defer"></script>
+<script type="text/javascript" class="ecom-page-info">
+ window.EComposer = window.EComposer || {};
+ window.EComposer.TEMPLATE_ID="647cd91badd9ba57d501b772";
+ window.EComposer.PAGE = {"template_id":"647cd91badd9ba57d501b772","title":"try subscribe","type":"page","slug":"ecom-try-subscribe","plan_id":1};
+ </script>
+<div class="ecom-builder" id="ecom-try-subscribe"><div class="ecom-sections" data-section-id="{{section.id}}"><section class="ecom-row ecom-core ecom-section ecom-prgb4666fxk" data-id="ecom-prgb4666fxk" style="z-index: inherit;"><div data-deep="1" class="core__row--columns"><div class="ecom-column ecom-core core__column--first ecom-44hdsw42e7a"><div class="core__column--wrapper"><div class="core__blocks" index="0"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-s4avbfoxpj" data-core-is="block"><div class="ecom__element element__heading ecom-element ecom-html" data-stopdrag="true" deep="1"><h2 class="ecom__heading">{{ 'sections.ecom-try-subscribe-page.headingtext_s4avbfoxpj_html' | t }}</h2></div></div><div class="ecom-block ecom-core core__block elmspace ecom-4yz90oipxt8" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-try-subscribe-page.textcontent_4yz90oipxt8_html' | t }}</div></div></div><div class="ecom-block ecom-core core__block ecom-jtn2l8rl2d" data-core-is="block"><div class="ecom-element ecom-shopify-elements ecom-shopify__newsletter-form" deep="1"><div class="ecom-shopify__newsletter-form-wrapper ecom-w__full"><div class="ecom-shopify__newsletter-form-container"><div>
+ {% form 'customer', action:'/contact', class: 'ecom-shopify__newsletter-form' ,id:'newsletter-form-ecom-jtn2l8rl2d' %}
+ <input type="hidden" name="contact[tags]" value="leadgen" />
+ <div class="ecom-newsletter-form-content">
+ <input
+ id="ECom-NewsletterForm-ecom-jtn2l8rl2d"
+ type="email"
+ name="contact[email]"
+ class="ecom-shopify__newsletter-form-field--input"
+ value="{{ form.email }}"
+ aria-required="true"
+ autocorrect="off"
+ autocapitalize="off"
+ autocomplete="email"
+ {% if form.errors %}
+ autofocus
+ aria-invalid="true"
+ {% endif %}
+ placeholder="Inserisci la mail"
+ required
+ >
+ <button type="submit" class="ecome-shopify__newsletter__button" name="commit">
+ <span> {{ 'sections.ecom-try-subscribe-page.submit_title_jtn2l8rl2d_html' | t }} </span>
+ <span class="ecom-shopify__newsletter__button-icon"> </span>
+ </button>
+ </div>
+ {%- if form.posted_successfully? or EComBuilderMode == true and false -%}
+ <div class="ecom-shopify__newsletter-form-success" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless %}>
+ {{ 'sections.ecom-try-subscribe-page.success_message_jtn2l8rl2d_html' | t }}
+ </div>
+ {%- endif -%}
+ {%- if form.errors or EComBuilderMode == true and false -%}
+ <div class="ecom-shopify__newsletter-form-message">
+ <h2 class="ecom-shopify__newsletter-form-status-error" role="alert" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless %}>
+ {{ 'sections.ecom-try-subscribe-page.error_title_jtn2l8rl2d_html' | t }}
+ </h2>
+ <p class="ecom-shopify__newsletter-form-detail-error">
+ {% if EComBuilderMode %}
+ This is example error text when missing email field
+ {% endif %}
+ {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+ </p>
+ </div>
+ {%- endif -%}
+ <div class="ecom-shopify__newsletter-form-message ecom-dn">
+ <p class="ecom-shopify__newsletter-form-detail-error">
+ {{ 'sections.ecom-try-subscribe-page.error_already_jtn2l8rl2d_html' | t }}
+ </p>
+ </div>
+ {% endform %}
+ </div></div></div></div></div><div class="ecom-block ecom-core core__block elmspace ecom-trm3963d2x" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-try-subscribe-page.textcontent_trm3963d2x_html' | t }}</div></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div><div class="ecom-column ecom-core core__column--last ecom-jexvoqv553d"><div class="core__column--wrapper"><div class="core__blocks" index="1"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-6hf3qs89fob" data-core-is="block"><div class="ecom-element ecom-base-image" deep="1"><figure><div class="ecom-container-image ecom-image-align"><div class="ecom-image-content-position ecom-image-default ecom-base-image-container-overlay"><picture class="ecom-image-picture"><img loading="lazy" src="https://cdn.shopify.com/s/files/1/0595/3060/8802/files/IMG_3401copia.jpg?v=1685882313" alt="IMG_3401copia" top="undefined" left="undefined" style=""></picture></div></div></figure></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div></div><div class="ecom-section__overlay"><div class="ecom-overlay"></div></div></section>
+</div></div>
+{% schema %}
+{
+ "name": "try subscribe",
+ "locales": {
+ "it": {
+ "headingtext_s4avbfoxpj_html": "Entra in meeo",
+ "textcontent_4yz90oipxt8_html": "<p style=\"font-variant-ligatures: normal; font-variant-caps: normal; font-size: 16px; line-height: inherit; font-family: Commissioner, Arial, Helvetica, sans-serif; color: rgb(28, 42, 33);\">Iscriviti per ricevere sconti esclusivi, avere accesso in anteprima ai nuovi arrivi&nbsp;<span style=\"color: rgb(28, 42, 33); font-family: Commissioner, Arial, Helvetica, sans-serif; font-size: 16px; font-variant-ligatures: normal; font-variant-caps: normal;\">e restare sempre aggiornato sulle novit\u00e0 di meeo.<\/span><\/p>",
+ "submit_title_jtn2l8rl2d_html": "Invia",
+ "success_message_jtn2l8rl2d_html": "Subscribed successfully!",
+ "error_title_jtn2l8rl2d_html": "Opps!. An error has occurred",
+ "error_already_jtn2l8rl2d_html": "Email have already subscribed!",
+ "textcontent_trm3963d2x_html": "<b>meeo<\/b> \u00e8 un brand che osserva, seleziona e crea con <b>fiori veri che non appassiscono<\/b>.\n\nStudiamo soluzioni etiche che riducono l'impatto ambientale della cultura usa e getta."
+ },
+ "en": {
+ "headingtext_s4avbfoxpj_html": "Entra in meeo",
+ "textcontent_4yz90oipxt8_html": "<p style=\"font-variant-ligatures: normal; font-variant-caps: normal; font-size: 16px; line-height: inherit; font-family: Commissioner, Arial, Helvetica, sans-serif; color: rgb(28, 42, 33);\">Iscriviti per ricevere sconti esclusivi, avere accesso in anteprima ai nuovi arrivi&nbsp;<span style=\"color: rgb(28, 42, 33); font-family: Commissioner, Arial, Helvetica, sans-serif; font-size: 16px; font-variant-ligatures: normal; font-variant-caps: normal;\">e restare sempre aggiornato sulle novit\u00e0 di meeo.<\/span><\/p>",
+ "submit_title_jtn2l8rl2d_html": "Invia",
+ "success_message_jtn2l8rl2d_html": "Subscribed successfully!",
+ "error_title_jtn2l8rl2d_html": "Opps!. An error has occurred",
+ "error_already_jtn2l8rl2d_html": "Email have already subscribed!",
+ "textcontent_trm3963d2x_html": "<b>meeo<\/b> \u00e8 un brand che osserva, seleziona e crea con <b>fiori veri che non appassiscono<\/b>.\n\nStudiamo soluzioni etiche che riducono l'impatto ambientale della cultura usa e getta."
+ }
+ },
+ "settings": [
+ {
+ "type": "header",
+ "content": "The section was generated by [Ecomposer](https:\/\/ecomposer.io).",
+ "info": "\n EComposer is a Visual Page Builder app on Shopify AppStore.\n It provides 100+ pre-built templates in library,\n so you can build unlimited pages that you can imagine with it.\n "
+ },
+ {
+ "type": "header",
+ "content": "[EDIT WITH EComposer APP \u2192](https:\/\/ecomposer.app\/shop\/builder?page=page&id=647cd91badd9ba57d501b772&utm_source=theme-customize)",
+ "info": "(*You must install the app to start editing this section [Learn more](https:\/\/help.ecomposer.io\/docs\/getting-started\/installation\/))"
+ }
+ ]
+}
+{% endschema %}

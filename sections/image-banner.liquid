@@ -1,0 +1,211 @@
+<div class="slider">
+  {% if section.blocks.size > 1 %}
+    <div class="slider-arrow slider-arrow-prev">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 1L8 12L16 23" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+    <div class="slider-arrow slider-arrow-next">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 1L16 12L8 23" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+  {% endif %}
+  <div class="slider-wrapper">
+    {%- for block in section.blocks -%}
+      {% liquid
+        assign block_text_color = block.settings.text_color
+        assign block_image = block.settings.image
+        assign block_title = block.settings.title | escape
+        assign block_button_label = block.settings.button_label | escape
+        assign block_button_link = block.settings.button_link
+        assign block_show_overlay = block.settings.show_overlay
+        assign block_overlay_color = block.settings.overlay_color
+        assign block_overlay_opacity = block.settings.overlay_opacity
+        assign overlay_opacity = block_overlay_opacity | times: 0.01
+        assign text_alignment = block.settings.text_alignment
+      %}
+      <div class="slide {{text_alignment}}"{% if block_text_color != blank %} style="color: {{ block_text_color }};"{% endif %}>
+        {%- if block_show_overlay -%}
+          <span class="overlay" style="{% if block_overlay_color != blank %}background-color: {{ block_overlay_color }};{% endif %}opacity: {{ overlay_opacity }};"></span>
+        {%- endif -%}
+<picture>
+  <source media="(max-width:750px)" srcset="{{ block_image | img_url: 'master' }}">
+  <source media="(min-width:750px)" srcset="{{ block_image | image_url: width: 2000 }}">
+  <img class="bg {% if forloop.index == 1 and section.settings.removeLazyLoad %}removelazyload{% else %}lazyload{% endif %}"
+       {% if forloop.index == 1 and section.settings.removeLazyLoad %}loading="eager"{% else %}loading="lazy"{% endif %}
+       alt="{{ block_image.alt | escape }}" width="100%" height="100%">
+</picture>
+{% comment %}
+        <img
+          class="bg"
+          src="{{ block_image | img_url: '2000x' }}"
+          alt="{{ block_image.alt | escape }}"
+        >
+{% endcomment %}
+        <div class="container">
+          <div class="wrap">
+            <div class="content">
+              <p class="h1 big">{{block_title}}</p>
+              <a href="{{block_button_link}}" class="arrow-link">
+                {{block_button_label}}
+                <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="pager">
+    <div class="container">
+      <div class="slider-pager"></div>
+    </div>
+  </div>
+</div>
+{% if section.blocks.size > 1 %}
+<script>
+  $(function() {
+    new Swiper('.home-hero .slider', {
+      wrapperClass: 'slider-wrapper',
+      slideClass: 'slide',
+      slidesPerView: 'auto',
+      loop: true,
+      navigation: {
+        nextEl: '.home-hero .slider-arrow-next',
+        prevEl: '.home-hero .slider-arrow-prev',
+      },
+      pagination: {
+        el: '.home-hero .slider-pager',
+        type: 'bullets',
+        clickable: true
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: false,
+      },
+    });
+  })
+</script>
+{% endif %}
+{% schema %}
+{
+  "name": "Home Slideshow",
+  "class": "home-hero",
+  "tag": "div",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id":"removeLazyLoad",
+      "label":"improve FCP",
+      "info":"remove lazyload from first image",
+      "default":false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Immagine",
+          "info": "1800 x 1000px recommended"
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Testo",
+          "default": "Lorem ipsum dolor sit amet"
+        },
+        {
+          "id": "button_label",
+          "type": "text",
+          "label": "Call to action",
+          "default": "Call to action"
+        },
+        {
+          "id": "button_link",
+          "type": "url",
+          "label": "Url di destinazione"
+        },
+        {
+          "id": "text_color",
+          "type": "color",
+          "label": "Colore del testo",
+          "default": "#1C2A21"
+        },
+        {
+          "id": "text_alignment",
+          "type": "select",
+          "label": "Allineamento testo",
+          "options": [
+            {
+              "value": "top-left",
+              "label": "In alto a sinistra"
+            },
+            {
+              "value": "top-right",
+              "label": "In alto a destra"
+            },
+            {
+              "value": "bottom-left",
+              "label": "In basso a sinistra"
+            },
+            {
+              "value": "bottom-right",
+              "label": "In basso a destra"
+            }
+          ],
+          "default": "bottom-right"
+        },
+        {
+          "type": "header",
+          "content": "Overlay"
+        },
+        {
+          "id": "show_overlay",
+          "type": "checkbox",
+          "label": "Mostra overlay",
+          "default": true
+        },
+        {
+          "id": "overlay_color",
+          "type": "color",
+          "label": "Colore",
+          "default": "#000000"
+        },
+        {
+          "id": "overlay_opacity",
+          "type": "range",
+          "label": "Opacità",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Slideshow",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Slide 1"
+          }
+        }
+      ]
+    }
+  ],
+  "templates": [
+    "index"
+  ]
+}
+
+{% endschema %}

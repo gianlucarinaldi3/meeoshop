@@ -1,0 +1,23 @@
+{% comment %}
+  Accepts:
+    - name: {String} Field name
+    - value: {Integer} Default value
+    Usage:
+    {% render 'quantity-selector', name: 'quantity', value: 1 %}
+{% endcomment %}
+<div class="selector quantity-selector{% if value > 9 %} more{% endif%}" data-quantity-selector>
+  <label class="label"><ly-as-937530>Quantità</ly-as-937530></label>
+  <span class="value">{{value}}</span>
+  <select>
+    {% for i in (1..9) %}
+      <option value="{{ i }}" {% if i == value %} selected{% endif %}>
+        {{ i }}
+      </option>
+    {% endfor %}
+    <option value="10+">
+      10+
+    </option>
+  </select>
+  <svg class="arrow"><use xlink:href="#icon-chevron"></use></svg>
+  <input type="text" value="{{value}}" name="{{name}}" pattern="\d*" />
+</div>

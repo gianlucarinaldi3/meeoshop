@@ -1,0 +1,174 @@
+<div id="register">
+  <div class="section-page-intro">
+    <div class="container">
+      <div class="outer">
+        <div class="inner">
+          <h1 class="h1 title"><ly-as-725300>Entra in meeo</ly-as-725300></h1>
+          <div class="summary">
+            <p><ly-as-725301>Registrati per ricevere sconti esclusivi, avere accesso in anteprima ai nuovi arrivi e restare sempre aggiornato sulle novità di meeo.</ly-as-725301></p>
+            <p><ly-as-725302>Crea il tuo account e inizia lo shopping.<br></br> <br>Se sei un'attività commerciale registrati aggiungendo la P. IVA e attendi la nostra validazione dell'account professionista.</br></ly-as-725302></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="login-form-outer">
+      <div class="form">
+        {% form 'create_customer' %}
+          {% if form.errors %}
+            <div class="feedback-notice error">
+              <p><strong><ly-as-725303>Attenzione, si sono verificati i seguenti errori:</ly-as-725303></strong></p>
+              <ul>
+                {% for field in form.errors %}
+                  <li>
+                    {% if field == 'form' %}
+                      {{ form.errors.messages[field] }}
+                    {% else %}
+                      <a href="#RegisterForm-{{ field }}">
+                        {{ form.errors.translated_fields[field] | capitalize }}
+                        {{ form.errors.messages[field] }}
+                      </a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          <div class="fields">
+            <div class="field">
+              <input
+                type="text"
+                name="customer[first_name]"
+                id="RegisterForm-FirstName"
+                {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+                autocomplete="given-name"
+                placeholder="{{ 'customer.register.first_name' | t }}"
+                required
+              >
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                name="customer[last_name]"
+                id="RegisterForm-LastName"
+                {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+                autocomplete="family-name"
+                placeholder="{{ 'customer.register.last_name' | t }}"
+                required
+              >
+            </div>
+            <div class="field wide">
+              <input
+                type="text"
+                name="customer[note][Azienda]"
+                id="RegisterForm-Company"
+                {% if form.company %}value="{{ form.company }}"{% endif %}
+                placeholder="Ragione sociale (se utente Business)"
+                
+              >
+            </div>
+            <div class="field wide">
+              <input
+                type="text"
+                name="customer[note][Indirizzo di fatturazione]"
+                id="RegisterForm-Address"
+                {% if form.address %}value="{{ form.address }}"{% endif %}
+                placeholder="Indirizzo di fatturazione"
+                required
+              >
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                name="customer[note][Città]"
+                id="RegisterForm-City"
+                {% if form.city %}value="{{ form.city }}"{% endif %}
+                placeholder="Città"
+                required
+              >
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                name="customer[note][CAP]"
+                id="RegisterForm-PostalCode"
+                {% if form.postal_code %}value="{{ form.postal_code }}"{% endif %}
+                placeholder="CAP"
+                required
+              >
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                name="customer[note][Partita IVA]"
+                id="RegisterForm-Vat"
+                {% if form.vat %}value="{{ form.vat }}"{% endif %}
+                placeholder="Partita IVA (se utente Business)"
+                
+              >
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                name="customer[note][SDI]"
+                id="RegisterForm-Sdi"
+                {% if form.sdi %}value="{{ form.sdi }}"{% endif %}
+                placeholder="Codice SDI o Pec (opzionale)"
+              >
+            </div>
+            <div class="field">
+              <select
+                name="customer[note][Attività]"
+                id="RegisterForm-Activity"
+                
+              >
+                <option value=""><ly-as-725304>Attività</ly-as-725304></option>
+                <option value="Utente privato"><ly-as-725305>Utente privato</ly-as-725305></option>
+                <option value="Visual merchandiser"><ly-as-725305>Visual merchandiser</ly-as-725305></option>
+                <option value="Ristoratore"><ly-as-725306>Hospitality e Ristorazione</ly-as-725306></option>
+                <option value="Fioristi"><ly-as-725307>Fioristi</ly-as-725307></option>
+                <option value="Fioristi"><ly-as-725308>Altro</ly-as-725308></option>
+              </select>
+            </div>
+            <div class="field">
+              <input
+                type="email"
+                name="customer[email]"
+                id="RegisterForm-email"
+                {% if form.email %} value="{{ form.email }}"{% endif %}
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="email"
+                placeholder="{{ 'customer.register.email' | t }}"
+                required
+              >
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                name="customer[password]"
+                id="RegisterForm-password"
+                required
+                placeholder="{{ 'customer.register.password' | t }}"
+              >
+            </div>
+            <div class="field wide">
+              <label class="checkbox">
+                <input type="checkbox" name="customer[note][consenso]" value="Privacy Reg" required />
+                <span class="label"><ly-as-725309>Ho letto, compreso e accettato la</ly-as-725309> <a href="/pages/privacy-policy" target="_blank"><ly-as-725310>Privacy Policy</ly-as-725310></a> <ly-as-725311>e desidero ricevere aggiornamenti, offerte e sconti riservati.</ly-as-725311></p>
+              </label>
+            </div>
+          </div>
+          <input type="hidden" name="customer[tags]" value="cliente_registrato" />
+          <button type="submit" class="button big">{{ 'customer.register.submit' | t }}</button>
+        {% endform %}
+        <script>
+          $(function() {
+            //$("#create_customer").validate();
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>

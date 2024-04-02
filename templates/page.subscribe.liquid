@@ -1,0 +1,93 @@
+<div class="landing-page">
+  <style>
+    /* Add your custom CSS styles for the landing page here */
+    .lead-generation-form input[type="email"] {
+      width: 250px;
+      height: 50px;
+      padding: 10px;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      color: #000;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .subscribe {
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .image-section {
+      flex: 1;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .image-section img {
+      max-width: 100%;
+      height: auto;
+    }
+    .image-section p {
+      max-width: 100%;
+      text-align: center;
+    }
+  </style>
+
+  <div class="container">
+    <div class="subscribe">
+      <h1 class="h1 title"><ly-as-725300>Entra in meeo</ly-as-725300></h1>
+      <div class="summary">
+        <p><ly-as-725301>Registrati per ricevere sconti esclusivi, avere accesso in anteprima ai nuovi arrivi</ly-as-725301></p>
+        <p><ly-as-725302>e restare sempre aggiornato sulle novità di meeo.</ly-as-725302></p><br>
+      </div>
+
+      {% form 'customer', class: 'lead-generation-form', redirect_to: 'https://meeoshop.com/pages/thank-you-page' %}
+        {% if form.posted_successfully? %}
+          <div class="feedback success"><ly-as-719342>Grazie di esserti registrato!</ly-as-719342></div>
+        {% endif %}
+        {% if form.errors %}
+          <div class="feedback error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</div>
+        {% endif %}
+
+        {% if form.posted_successfully? == false and form.errors == null %}
+          <input
+            id="LeadGenerationForm--{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            {% if form.errors %}
+              autofocus
+              aria-invalid="true"
+              aria-describedby="LeadGenerationForm-error"
+            {% elsif form.posted_successfully? %}
+              aria-describedby="LeadGenerationForm-success"
+            {% endif %}
+            placeholder="Scrivi il tuo indirizzo email"
+            required
+          >
+          <input type="hidden" name="contact[tags]" value="leadgen-customer">
+          <br><br>
+          <button type="submit" class="button big">{{ 'customer.register.submit' | t }}</button>
+          <br>
+      <p class="note"><ly-as-719346>Iscrivendoti, resterai aggiornato in anteprima sui nuovi arrivi e otterrai il 10% di sconto su un ordine minimo di 50€.</ly-as-719346></p>
+        {% endif %}
+      {% endform %}
+    </div>
+
+    <div class="image-section">
+      <img src="https://cdn.shopify.com/s/files/1/0595/3060/8802/files/garofani_boxcolor.jpg?v=1683725673" alt="Image" loading="lazy" style="max-width: 100%; height: auto;">
+      <p>meeo è un brand che osserva, seleziona e crea con fiori veri che non appassiscono.</p>
+      <p>Studiamo soluzioni etiche che riducono l'impatto ambientale della cultura usa e getta.</p>
+    </div>
+  </div>
+</div>
+
+
+{% section 'custom-liquid' %}
+{% section 'ss-feature-1' %}
+
+
+

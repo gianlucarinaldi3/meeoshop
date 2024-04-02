@@ -1,0 +1,310 @@
+{% comment %}
+ EComposer (https://ecomposer.io)
+ You SHOULD NOT modify source code in this page because
+ It is automatically generated from EComposer
+ {% endcomment %} 
+ 
+ {% assign ecom_root_url = routes.root_url %}
+ {% if ecom_root_url != '/'%}
+ {% assign ecom_root_url = routes.root_url | append: '/' %}
+ {% endif %}
+ <link rel="stylesheet" media="print" onload="this.media='all'" id="ecom-vendors-modal_css" href="https://cdn.ecomposer.app/vendors/css/ecom_modal.css" /><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.4" /><noscript><link rel="stylesheet" media="all" onload="this.media='all'" id="ecom-vendors-modal_css" href="https://cdn.ecomposer.app/vendors/css/ecom_modal.css" /><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.4" /></noscript><script type="text/javascript" asyc="async" id="ecom-vendors-modal_js" src="https://cdn.ecomposer.app/vendors/js/ecom_modal.js" ></script>
+{%capture section_id %}ecom-subscribeduplicate-r5chb-page{% endcapture%}{% if section and section_id == section.id and headless == true %}
+{{ content_for_header }}
+{% render 'ecom_header', ECOM_THEME: true %}{% endif %}<link href="https://fonts.googleapis.com/css?family=Commissioner:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Fraunces:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/>
+{{'ecom-647e1d8eeba9b80eb30a3273.css' | asset_url | stylesheet_tag }}
+<script src="{{'ecom-647e1d8eeba9b80eb30a3273.js' | asset_url }}" defer="defer"></script>
+<script type="text/javascript" class="ecom-page-info">
+ window.EComposer = window.EComposer || {};
+ window.EComposer.TEMPLATE_ID="647e1d8eeba9b80eb30a3273";
+ window.EComposer.PAGE = {"template_id":"647e1d8eeba9b80eb30a3273","title":"Subscribe(duplicate)","type":"page","slug":"ecom-subscribeduplicate-r5chb","plan_id":1};
+ </script>
+<div class="ecom-builder" id="ecom-subscribeduplicate-r5chb"><div class="ecom-sections" data-section-id="{{section.id}}">
+ {% comment %}
+ // Reactive
+ * this.data.settings.product
+ {% endcomment %}
+ {% liquid
+ if request.page_type != 'product' or product == blank
+ assign selected_product = ''
+ if selected_product == blank or selected_product == '' or all_products[selected_product] == blank
+ assign product = collections['all'].products.first
+ else
+ assign product = all_products[selected_product]
+ if product.id == blank
+ assign product = collections['all'].products.last
+ endif
+ endif
+ endif
+ %}
+ {%- if product != blank -%}
+ {%- form 'product', product,class: "ecom-product-form ecom-product-form--single ecom-click", product_id: product.id, data-product_id: product.id,data-product-id: product.id, data-handle: product.handle-%}
+ <section class="ecom-row ecom-core ecom-section ecom-prgb4666fxk" data-id="ecom-prgb4666fxk" style="z-index: inherit;"><div data-deep="1" class="core__row--columns"><div class="ecom-column ecom-core core__column--first ecom-44hdsw42e7a"><div class="core__column--wrapper"><div class="core__blocks" index="0"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-s4avbfoxpj" data-core-is="block"><div class="ecom__element element__heading ecom-element ecom-html" data-stopdrag="true" deep="1"><h2 class="ecom__heading">{{ 'sections.ecom-subscribeduplicate-r5chb-page.headingtext_s4avbfoxpj_html' | t }}</h2></div></div><div class="ecom-block ecom-core core__block elmspace ecom-4yz90oipxt8" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-subscribeduplicate-r5chb-page.textcontent_4yz90oipxt8_html' | t }}</div></div></div><div class="ecom-block ecom-core core__block elmspace ecom-ssb0trugor" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-subscribeduplicate-r5chb-page.textcontent_ssb0trugor_html' | t }}</div></div></div><div class="ecom-block ecom-core core__block ecom-jtn2l8rl2d" data-core-is="block"><div class="ecom-element ecom-shopify-elements ecom-shopify__newsletter-form" deep="1"><div class="ecom-shopify__newsletter-form-wrapper ecom-w__full"><div class="ecom-shopify__newsletter-form-container"><div>
+ {% form 'customer', action:'/contact', class: 'ecom-shopify__newsletter-form' ,id:'newsletter-form-ecom-jtn2l8rl2d' %}
+ <input type="hidden" name="contact[tags]" value="leadgen" />
+ <div class="ecom-newsletter-form-content">
+ <input
+ id="ECom-NewsletterForm-ecom-jtn2l8rl2d"
+ type="email"
+ name="contact[email]"
+ class="ecom-shopify__newsletter-form-field--input"
+ value="{{ form.email }}"
+ aria-required="true"
+ autocorrect="off"
+ autocapitalize="off"
+ autocomplete="email"
+ {% if form.errors %}
+ autofocus
+ aria-invalid="true"
+ {% endif %}
+ placeholder="Inserisci la mail"
+ required
+ >
+ <button type="submit" class="ecome-shopify__newsletter__button" name="commit">
+ <span> {{ 'sections.ecom-subscribeduplicate-r5chb-page.submit_title_jtn2l8rl2d_html' | t }} </span>
+ <span class="ecom-shopify__newsletter__button-icon"> </span>
+ </button>
+ </div>
+ {%- if form.posted_successfully? or EComBuilderMode == true and false -%}
+ <div class="ecom-shopify__newsletter-form-success" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless %}>
+ {{ 'sections.ecom-subscribeduplicate-r5chb-page.success_message_jtn2l8rl2d_html' | t }}
+ </div>
+ {%- endif -%}
+ {%- if form.errors or EComBuilderMode == true and false -%}
+ <div class="ecom-shopify__newsletter-form-message">
+ <h2 class="ecom-shopify__newsletter-form-status-error" role="alert" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless %}>
+ {{ 'sections.ecom-subscribeduplicate-r5chb-page.error_title_jtn2l8rl2d_html' | t }}
+ </h2>
+ <p class="ecom-shopify__newsletter-form-detail-error">
+ {% if EComBuilderMode %}
+ This is example error text when missing email field
+ {% endif %}
+ {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+ </p>
+ </div>
+ {%- endif -%}
+ <div class="ecom-shopify__newsletter-form-message ecom-dn">
+ <p class="ecom-shopify__newsletter-form-detail-error">
+ {{ 'sections.ecom-subscribeduplicate-r5chb-page.error_already_jtn2l8rl2d_html' | t }}
+ </p>
+ </div>
+ {% endform %}
+ </div></div></div></div></div><div class="ecom-block ecom-core core__block elmspace ecom-trm3963d2x" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-subscribeduplicate-r5chb-page.textcontent_trm3963d2x_html' | t }}</div></div></div><div class="ecom-block ecom-core core__block elmspace ecom-vb8u6na7k2" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-subscribeduplicate-r5chb-page.textcontent_vb8u6na7k2_html' | t }}</div></div></div><div class="ecom-block ecom-core core__block elmspace ecom-3hhavm2a9sy" data-core-is="block"><div class="ecom__element element__heading ecom-element ecom-html" data-stopdrag="true" deep="1"><h2 class="ecom__heading">{{ 'sections.ecom-subscribeduplicate-r5chb-page.headingtext_3hhavm2a9sy_html' | t }}</h2></div></div><div class="ecom-block ecom-core core__block elmspace ecom-gdrj4enhb7i" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-subscribeduplicate-r5chb-page.textcontent_gdrj4enhb7i_html' | t }}</div></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div><div class="ecom-column ecom-core core__column--last ecom-jexvoqv553d"><div class="core__column--wrapper"><div class="core__blocks" index="1"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-6hf3qs89fob" data-core-is="block"><div class="ecom-element ecom-base-image" deep="1"><figure><div class="ecom-container-image ecom-image-align"><div class="ecom-image-content-position ecom-image-default ecom-base-image-container-overlay"><picture class="ecom-image-picture"><img loading="lazy" src="https://cdn.shopify.com/s/files/1/0595/3060/8802/products/IMG_2829copia.jpg?v=1681067038&amp;width=500&amp;height=500&amp;crop=center" alt="IMG_2829copia" top="undefined" left="undefined" style=""></picture></div></div></figure></div></div><div class="ecom-block ecom-core core__block elmspace ecom-mq4v9dr9pxe" data-core-is="block"><div class="ecom-element ecom-product-single ecom-product-single__review" deep="1"><div class="ecom-product-single__review-wrapper" data-review-platform="{%- assign review_platform = shop.metafields.ecomposer.app_review.value -%}{{review_platform}}"><div class="ecom-product-single__review-container">
+ {%- if review_platform and review_platform != 'none' -%}
+ {%- if EComBuilderMode == true -%}
+ <div class="ecom-theme-app-extensions-skeleton">
+ <div class="ecom-app-extension-info">
+ <span class="ecom-theme-app-extension-icon">
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M416 176C416 78.8 322.9 0 208 0S0 78.8 0 176c0 41.48 17.07 79.54 45.44 109.6c-15.17 32.34-38.65 58.07-38.95 58.38c-6.514 6.836-8.309 16.91-4.568 25.67C5.754 378.4 14.26 384 23.66 384c54.19 0 97.76-20.73 125.9-39.17C168.1 349.4 187.7 352 208 352C322.9 352 416 273.2 416 176zM208 320c-16.96 0-34.04-2.098-50.75-6.232L143.7 310.4L132 318.1c-20.43 13.38-51.58 28.99-89.85 32.97c9.377-12.11 22.3-30.63 32.24-51.82l9.242-19.71L68.72 263.7C44.7 238.2 32 207.9 32 176C32 96.6 110.1 32 208 32S384 96.6 384 176S305 320 208 320zM606.4 435.4C627.6 407.1 640 372.9 640 336C640 238.8 554 160 448 160c-.3145 0-.6191 .041-.9336 .043C447.5 165.3 448 170.6 448 176c0 5.43-.4668 10.76-.9414 16.09C447.4 192.1 447.7 192 448 192c88.22 0 160 64.6 160 144c0 28.69-9.424 56.45-27.25 80.26l-13.08 17.47l11.49 18.55c6.568 10.61 13.18 19.74 18.61 26.74c-18.26-1.91-36.45-6.625-54.3-14.09l-12.69-5.305l-12.58 5.557C495.9 475 472.3 480 448 480c-75.05 0-137.7-46.91-154.9-109.7c-10.1 3.336-20.5 6.132-31.2 8.271C282.7 455.1 357.1 512 448 512c29.82 0 57.94-6.414 83.12-17.54C555 504.5 583.7 512 616.3 512c9.398 0 17.91-5.57 21.73-14.32c3.74-8.758 1.945-18.84-4.568-25.67C633.3 471.8 619.6 456.8 606.4 435.4z"/></svg>
+ </span>
+ <span class="ecom-theme-app-extension-title" style="margin-left: 5px">{{review_platform | replace: '_', ' ' | replace: '-', ' '}}</span>
+ </div>
+ {%- if review_platform != 'ali-reviews' -%}
+ <div class="ecom-placeholder-on-builder-mode" data-ecom-placeholder="The review element will display when published to Online store"></div>
+ {%- else -%}
+ <div class="ecom-placeholder-on-builder-mode" data-ecom-placeholder="The review platform not supported"></div>
+ {%- endif -%}
+ </div>
+ {%- else -%}
+ {%- case review_platform -%}
+ {%- when 'none' -%}
+ <div class="ecom-theme-app-extensions-skeleton">
+ <p>Please select the integrated review app platform in settings</p>
+ </div>
+ {%- when 'ali-reviews' -%}
+ <div id="shopify-ali-review" product-id="{{ product.id }}"> {{- shop.metafields.review_collector.review_code -}}</div>
+ {%- when 'opinew-reviews' -%}
+ <div style="clear:both;"></div><div id="opinew-reviews-product-page-code" class="opw-widget-wrapper-default">
+ <span id="opinew-plugin" data-server-address="https://api.opinew.com"
+ data-opw-prodreviews="{{ product.metafields.opinew_metafields['product_plugin'] }}"
+ data-opinew-shop-id="{{ shop.id }}" data-shop-url="{{shop.domain}}"
+ data-platform-product-id="{{product.id}}">
+ <span id="opinew_product_plugin_app"></span>
+ </span>
+ </div>
+ {%- when 'judgeme' -%}
+ {%- render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true, product: product -%}
+ {%- when 'product-reviews-addon' -%}
+ <div id="stamped-main-widget"
+ data-widget-style="standard"
+ data-product-id="{{ product.id }}"
+ data-name="{{ product.title | escape }}"
+ data-url="{{ shop.url }}{{ product.url }}"
+ data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"
+ data-description="{{ product.description | escape }}"
+ data-product-sku="{{product.handle}}"
+ data-widget-language="{{ language }}">
+ </div>
+ {%- when 'areviews-aliexpress'-%}
+ <div class="page-full">{%- render 'aliexpress_reviews', product: product-%}</div>
+ {%- when 'loox'-%}
+ <div id="looxReviews" data-product-id="{{product.id}}" >{{- product.metafields.loox.reviews -}}</div>
+ {% when 'ryviu'%}
+ <div class="lt-block-reviews">
+ <ryviu-widget product_id="{{product.id}}" handle="{{product.handle}}" title_product="{{product.title}}" image_product="{{ product.featured_image.src | img_url: '100x' }}"></ryviu-widget>
+ </div>
+ {%- when 'yotpo-social-reviews' -%}
+ <div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+ {%- when 'aliexpress-reviews-importer'-%}
+ <div id="shopbooster-ali" product-id="{{ product.id }}" ></div>
+ {%- when 'rivyo-product-review'-%}
+ <div id="wc_review_section" class="wc_review_main_content" data-url="{{ shop.url }}" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}" data-limit="0"></div>
+ {%- when 'ali-reviews' -%}
+ <div class="ecom-theme-app-extensions-skeleton">
+ <p>The review platform not supported</p>
+ </div>
+ {%-when 'growave' -%}
+ {% capture the_snippet_reviews %}{% render 'socialshopwave-widget-recommends' with 1, product: product %}{% endcapture %}
+ {% unless the_snippet_reviews contains 'Liquid error' %}
+ {{ the_snippet_reviews }}
+ {% endunless %}
+ {%- when 'smart-aliexpress-reviews'-%}
+ {% render "reviews-importer" product: product%}
+ {%- when 'photo-reviews' -%}
+ <div style="clear:both;"></div>
+ <div id="opinew-reviews-product-page-code" class="">
+ <span id="opinew-plugin" data-server-address="https://www.opinew.com" data-opw-prodreviews="{{ product.metafields.opinew_metafields['product_plugin'] }}" data-opinew-shop-id="{{ shop.id }}" data-shop-url="{{shop.domain}}" data-platform-product-id="{{product.id}}">
+ <span id="opinew_product_plugin_app"></span>
+ </span>
+ </div>
+ {%- when 'product-reviews' -%}
+ <div id="shopify-product-reviews" data-id="{{product.id}}">{{- product.metafields.spr.reviews -}}</div>
+ {%- when 'lai-reviews' -%}
+ {%- if EComBuilderMode -%}
+ <div class="ecom-placeholder-on-builder-mode" data-ecom-placeholder="Lai review form will display when published to Online store"></div>
+ {%- endif -%}
+ <div class="scm-container custom" style="display: none;">
+ <div id="scm-reviews-importer" class="scm-reviews-importer">
+ <iframe id="scm-reviews-importer-iframe" width="100%">
+ </iframe>
+ </div>
+ </div>
+ {% render "reviews-importer",product : product %}
+ {%- when 'rivyo' -%}
+ <div id="wc_review_section" class="wc_review_main_content" data-url="{{ shop.url }}" data-handle="{{ product.handle }}" data-product_id="{{ product.id }}" data-limit="0"></div>
+ {%- when 'trustoo' -%}
+ <div class="custom-vstar-review-widget" style="width:100%"></div>
+ {% else %}
+ <div class="ecom-theme-app-extensions-skeleton">
+ <p>The reivew platform not supported</p>
+ </div>
+ {%-endcase-%}
+ {%- endif -%}
+ {%- else -%}
+ <div class="ecom-theme-app-extensions-skeleton">
+ <p>Please select the integrated review app platform in settings</p>
+ </div>
+ {%- endif -%}
+ </div></div></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div></div><div class="ecom-section__overlay"><div class="ecom-overlay"></div></div></section>
+ {% unless ecom_has_variant_picker %}
+ {%- capture ecom_product_json -%}
+ {
+ "id": {{ product.id }},
+ "title": {{ product.title | json }},
+ "handle": {{ product.handle | json }},
+ "price": {{ product.price| json }},
+ "price_min": {{ product.price_min| json }},
+ "price_max": {{ product.price_max| json }},
+ "available": {{ product.available | json }},
+ "price_varies": {{ product.price_varies| json }},
+ "compare_at_price": {{ product.compare_at_price| json }},
+ "compare_at_price_min": {{ product.compare_at_price_min| json }},
+ "compare_at_price_max": {{ product.compare_at_price_max| json }},
+ "compare_at_price_varies": {{ product.compare_at_price_varies| json }},
+ "variants": [
+ {%- for variant in product.variants -%}
+ {
+ "id": {{ variant.id }},
+ "title": " {{ variant.option1 | handleize }}{%- if product.options.size == 2 -%} / {%- endif -%} {{ variant.option2 | handleize }}{%- if product.options.size == 3 -%} / {%- endif -%} {{ variant.option3 | handleize }}",
+ "option1": {{ variant.option1 | json }},
+ "option2": {%- if product.options.size == 1 -%}null{%-else-%} {{ variant.option2 | json }}{%-endif-%},
+ "option3": {%- if product.options.size == 1 or product.options.size == 2 -%}null{%-else-%} {{ variant.option3 | json }}{%-endif-%},
+ "sku": {{ variant.sku | json }},
+ "requires_shipping": {{ variant.requires_shipping }},
+ "taxable": {{ variant.taxable |json }},
+ "selling_plan_allocations":{%- if variant.selling_plan_allocations and variant.selling_plan_allocations.size > 0 -%}[{% for allocation in variant.selling_plan_allocations %}{"price":{{allocation.price}},"selling_plan":{"id":{{allocation.selling_plan.id}}, "name":{{allocation.selling_plan.name | json }} } }{%unless forloop.last%},{% endunless%}{%- endfor -%}]{%- else -%}null{%- endif -%},
+ "featured_image": {%- if variant.image.id != blank -%}{
+ "id": {{ variant.image.id | json }},
+ "product_id": {{ product.id | json }},
+ "width": {{ variant.image.width | json }},
+ "height": {{ variant.image.height | json }},
+ "src": {{ variant.image.src | json }},
+ "position": {{ variant.image.position }}
+ }{%- else-%}null{%-endif-%},
+ "available": {{ variant.available }},
+ "public_title": " {{ variant.option1 | handleize }}{%- if product.options.size == 2 -%} / {%- endif -%} {{ variant.option2 | handleize }}{%- if product.options.size == 3 -%} / {%- endif -%} {{ variant.option3 | handleize }}",
+ "options": {{ variant.options | json }},
+ "price": {{ variant.price| json }},
+ "weight": {{ variant.weight| json }},
+ "compare_at_price": {{ variant.compare_at_price | json }},
+ "inventory_quantity": {{ variant.inventory_quantity | json }},
+ "inventory_management": {{ variant.inventory_management | json }},
+ "inventory_policy": {{ variant.inventory_policy | json }},
+ "next_incoming_date": {% if variant.next_incoming_date %}{{variant.next_incoming_date | time_tag | json }}{% else%}null{% endif %},
+ "barcode": {{ variant.barcode | json }}
+ }{%- if forloop.last == false -%},{%- endif -%}
+ {%- endfor -%}
+ ],
+ "featured_image": {{ product.featured_image | json }},
+ "options": [
+ {%- for option in product.options -%}
+ {{ option | json }}{%- if forloop.last == false -%},{%- endif -%}
+ {%-endfor -%}
+ ]
+ }
+ {%- endcapture -%}
+ <input type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}" />
+ <script type="application/json" id="product-json-{{product.id}}-ecom-prgb4666fxk">
+ {{ ecom_product_json}}
+ </script>
+ {% endunless %}
+ {%- endform -%}
+ {% assign ecom_has_variant_picker = false %}
+ {%- endif -%}
+ 
+</div></div>
+{% schema %}
+{
+ "name": "Subscribe(duplicate)",
+ "locales": {
+ "it": {
+ "submit_title_jtn2l8rl2d_html": "Invia",
+ "success_message_jtn2l8rl2d_html": "Subscribed successfully!",
+ "error_title_jtn2l8rl2d_html": "Opps!. An error has occurred",
+ "error_already_jtn2l8rl2d_html": "Email have already subscribed!",
+ "headingtext_s4avbfoxpj_html": "Ricevil il 10% di sconto sul tuo primo ordine",
+ "textcontent_4yz90oipxt8_html": "Regala a te e i tuoi cari la bellezza dei fiori senza tempo con poca manutenzione",
+ "textcontent_ssb0trugor_html": "Iscriviti per ricevere&nbsp;<b>sconti esclusivi<\/b>, avere accesso in anteprima ai nuovi arrivi&nbsp;e restare sempre aggiornato sulle novit\u00e0 di meeo.",
+ "textcontent_trm3963d2x_html": "Benvenuto nella nostra esclusiva offerta di fiori stabilizzati! Se sei alla ricerca di un modo unico ed elegante per decorare la tua casa, ufficio o sorprendere qualcuno con un dono indimenticabile, sei nel posto giusto.",
+ "textcontent_vb8u6na7k2_html": "I nostri fiori stabilizzati hanno una bellezza senza tempo e un fascino che dura per anni, senza alcuna manutenzione.<div><br><\/div><div>Immagina di avere fiori freschi e vibranti che non appassiscono mai, che ti accompagnano nelle giornate speciali e ti regalano gioia ogni volta che li guardi.&nbsp;<\/div><div><br><\/div><div>Questo \u00e8 ci\u00f2 che otterrai con i nostri fiori stabilizzati<\/div>",
+ "headingtext_3hhavm2a9sy_html": "Ecco perch\u00e9 siamo entusiasti di offrirti uno sconto speciale del 10% sul tuo primo acquisto",
+ "textcontent_gdrj4enhb7i_html": "Ecco perch\u00e9 siamo entusiasti di offrirti uno sconto speciale del 10% sul tuo primo acquisto<div><\/div>"
+ },
+ "en": {
+ "submit_title_jtn2l8rl2d_html": "Invia",
+ "success_message_jtn2l8rl2d_html": "Subscribed successfully!",
+ "error_title_jtn2l8rl2d_html": "Opps!. An error has occurred",
+ "error_already_jtn2l8rl2d_html": "Email have already subscribed!",
+ "headingtext_s4avbfoxpj_html": "Ricevil il 10% di sconto sul tuo primo ordine",
+ "textcontent_4yz90oipxt8_html": "Regala a te e i tuoi cari la bellezza dei fiori senza tempo con poca manutenzione",
+ "textcontent_ssb0trugor_html": "Iscriviti per ricevere&nbsp;<b>sconti esclusivi<\/b>, avere accesso in anteprima ai nuovi arrivi&nbsp;e restare sempre aggiornato sulle novit\u00e0 di meeo.",
+ "textcontent_trm3963d2x_html": "Benvenuto nella nostra esclusiva offerta di fiori stabilizzati! Se sei alla ricerca di un modo unico ed elegante per decorare la tua casa, ufficio o sorprendere qualcuno con un dono indimenticabile, sei nel posto giusto.",
+ "textcontent_vb8u6na7k2_html": "I nostri fiori stabilizzati hanno una bellezza senza tempo e un fascino che dura per anni, senza alcuna manutenzione.<div><br><\/div><div>Immagina di avere fiori freschi e vibranti che non appassiscono mai, che ti accompagnano nelle giornate speciali e ti regalano gioia ogni volta che li guardi.&nbsp;<\/div><div><br><\/div><div>Questo \u00e8 ci\u00f2 che otterrai con i nostri fiori stabilizzati<\/div>",
+ "headingtext_3hhavm2a9sy_html": "Ecco perch\u00e9 siamo entusiasti di offrirti uno sconto speciale del 10% sul tuo primo acquisto",
+ "textcontent_gdrj4enhb7i_html": "Ecco perch\u00e9 siamo entusiasti di offrirti uno sconto speciale del 10% sul tuo primo acquisto<div><\/div>"
+ }
+ },
+ "settings": [
+ {
+ "type": "header",
+ "content": "The section was generated by [Ecomposer](https:\/\/ecomposer.io).",
+ "info": "\n EComposer is a Visual Page Builder app on Shopify AppStore.\n It provides 100+ pre-built templates in library,\n so you can build unlimited pages that you can imagine with it.\n "
+ },
+ {
+ "type": "header",
+ "content": "[EDIT WITH EComposer APP \u2192](https:\/\/ecomposer.app\/shop\/builder?page=page&id=647e1d8eeba9b80eb30a3273&utm_source=theme-customize)",
+ "info": "(*You must install the app to start editing this section [Learn more](https:\/\/help.ecomposer.io\/docs\/getting-started\/installation\/))"
+ }
+ ]
+}
+{% endschema %}

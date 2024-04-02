@@ -1,0 +1,168 @@
+{% assign title = section.settings.title %}
+{% assign text = section.settings.text %}
+{% assign image = section.settings.image %}
+  <div class="container" data-waypoint>
+    <div class="wrap">
+      {% if title != blank %}
+        <p class="title h1">{{title}}</p>
+      {% endif %}
+      <div class="media">
+        {% if section.blocks.size == 0 %}
+          <div class="spacer">
+            {% if image != blank %}
+              <img
+                src="{{ image | img_url: '1400x' }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+                width="1400"
+                height="700"
+              >
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="shoppable-image">
+            <div class="spacer">
+              {% if image != blank %}
+                <img
+                  src="{{ image | img_url: '1400x' }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="1400"
+                  height="700"
+                >
+              {% endif %}
+            </div>
+            {% for block in section.blocks %}
+              {% assign hotspot_product = all_products[block.settings.product] %}
+              {% if hotspot_product != empty %}
+                <div class="product" style="top:{{block.settings.y_axis}}%;left:{{block.settings.x_axis}}%;">
+                  <span class="handle"></span>
+                  <div class="card">
+                    <div class="card-inner">
+                      <a href="{{hotspot_product.url}}" class="img">
+                        {%- if hotspot_product.featured_media -%}
+                          <img
+                            src="{{ hotspot_product.featured_media | img_url: '100x130' }}"
+                            alt="{{ hotspot_product.featured_media.alt | escape }}"
+                            loading="lazy"
+                            width="100"
+                            height="130"
+                          >
+                        {%- endif -%}
+                      </a>
+                      <span class="content">
+                        <span class="top">
+                          <span class="name"><a href="{{hotspot_product.url}}">{{hotspot_product.title}}</a></span>
+                          {% render 'price', product: hotspot_product, price_class: 'price', tag: 'span' %}
+                        </span>
+                        <span class="bottom">
+                          <a href="{{hotspot_product.url}}" class="arrow-link">
+                            Acquista
+                            <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+                          </a>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      {% if text != blank %}
+        <p class="text">{{text}}</p>
+      {% endif %}
+    </div>
+  </div>
+
+{% schema %}
+{
+  "name": "Allestimento",
+  "class": "main-section section-staging",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Descrizione"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "x_axis",
+          "label": "Horizontal axis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y_axis",
+          "label": "Vertical axis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Allestimento",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "x_axis": 10,
+            "y_axis": 65
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "x_axis": 25,
+            "y_axis": 30
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "x_axis": 85,
+            "y_axis": 55
+          }
+        }
+      ]
+    }
+  ],
+  "templates": [
+    "page"
+  ]
+}
+
+{% endschema %}

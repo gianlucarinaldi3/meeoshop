@@ -1,0 +1,14 @@
+{% assign texts = product.description | split: "<!--features-->" %}
+{% assign main_text = texts[0] %}
+{% assign secondary_text = texts[1] %}
+<div class="intro rich-text">
+  {{ main_text }}
+</div>
+{% if secondary_text != blank %}
+  <div class="features">
+    <div class="features-inner rich-text">
+      {{ secondary_text }}
+    </div>
+  </div>
+  <a href="#" class="features-handle"><svg class="icon"><use xlink:href="#icon-chevron"></use></svg> <ly-as-722692>Mostra caratteristiche</ly-as-722692></a>
+{% endif %}

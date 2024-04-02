@@ -1,0 +1,36 @@
+{% assign size = 'small' %}
+{% if big == true %}
+  {% assign size = 'big' %}
+{% endif %}
+<div class="blog-card {% if size == 'big' %} big{% endif %}">
+  <a href="{{ post.url | default: '#' }}" class="img">
+    {% if post.image %}
+      {% if size == 'big' %}
+        <img
+          src="{{ post.image | image_url: width: 580 }}"
+          alt="{{ post.image.alt | escape }}"
+          loading="lazy"
+          width="1400"
+          height="1000"
+        >
+      {% else %}
+        <img
+          src="{{ post.image | image_url: width: 580 }}"
+          alt="{{ post.image.alt | escape }}"
+          loading="lazy"
+          width="700"
+          height="900"
+        >
+      {% endif %}
+    {% endif %}
+  </a>
+  {% if post.tags.size > 0 %}
+    <p class="category">{{post.tags | join:", "}}</p>
+  {% endif %}
+  <p class="title"><a href="{{ post.url | default: '#' }}">{{post.title}}</a></p>
+  {%- if post.excerpt == blank -%}
+    <p>{{ post.content | strip_html | truncatewords: 20 }}</p>
+  {%- else -%}
+    {{ post.excerpt }}
+  {%- endif -%}
+</div>

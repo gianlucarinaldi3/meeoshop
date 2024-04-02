@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="section-heading">
+    <h2 class="h2 section-title">{{section.settings.title}}</h2>
+  </div>
+  <div class="collections">
+    {% for block in section.blocks %}
+      <div class="collection-card">
+        <a href="{{block.settings.url}}">
+          <div class="image img-spacer">
+            {%- if block.settings.image -%}
+              <img
+                src="{{ block.settings.image | img_url: '450x600' }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                loading="lazy"
+                width="450"
+                height="600"
+              >
+            {%- endif -%}
+          </div>
+          <p class="name">
+            {{block.settings.title}}
+            <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+          </p>
+          <p>{{block.settings.subtitle}}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collezioni",
+  "class": "main-section section-collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titolo"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sottotitolo"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Immagine"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collezioni"
+    }
+  ],
+  "templates": [
+    "index"
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,18 @@
+<div id="common-page">
+  <div class="container">
+    <div class="page-outer">
+      <div class="page-inner">
+        <h1 class="h1 page-title">{{ page.title | escape }}</h1>
+        <div class="page-content">{{ page.content }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contenuto pagina",
+  "tag": "section",
+  "class": "spaced-section"
+}
+{% endschema %}

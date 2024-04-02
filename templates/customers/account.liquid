@@ -1,0 +1,76 @@
+<div class="section-page-intro">
+  <div class="container">
+    <div class="outer">
+      <div class="inner">
+        <h1 class="h1 title"><ly-as-724856>Il tuo account su meeo</ly-as-724856></h1>
+        <div class="summary">
+          <p><ly-as-724857>Qui puoi gestire i tuoi indirizzi di spedizione e fatturazione e visualizzare lo storico degli ordini.</ly-as-724857></p>
+          <p><ly-as-724858>È tutto ok? Fai il</ly-as-724858> <a href="{{ routes.account_logout_url }}"><ly-as-724859>Log out</ly-as-724859></a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="account-wrap">
+    <div class="orders">
+      <h2 class="h2 title"><ly-as-724860>Storico Ordini</ly-as-724860></h2>
+      {% if customer.orders.size > 0 %}
+        <table role="table" class="order-history">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
+              <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+              <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
+              <th id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.fulfillment_status' | t }}</th>
+              <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            {% for order in customer.orders %}
+              <tr role="row">
+                <td
+                  id="RowOrder"
+                  role="cell"
+                  headers="ColumnOrder"
+                  data-label="{{ 'customer.orders.order_number' | t }}"
+                >
+                  <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+                    {{ order.name }}
+                  </a>
+                </td>
+                <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+                  {{ order.created_at | time_tag: format: 'date' }}
+                </td>
+                <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">
+                  {{ order.financial_status_label }}
+                </td>
+                <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                  {{ order.fulfillment_status_label }}
+                </td>
+                <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+                  {{ order.total_price | money_with_currency }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>{{ 'customer.orders.none' | t }}</p>
+      {% endif %}
+    </div>
+    <div class="addresses">
+      <div class="box">
+        <h2 class="h3 title">{{ customer.name }}</h2>
+        <p>{{ customer.email }}</p>
+        <h2 class="h3 title"><ly-as-724861>Indirizzo predefinito</ly-as-724861></h2>
+        {% if customer.default_address %}
+          {{ customer.default_address | format_address }}
+        {% else %}
+          <p><ly-as-724862>Non hai impostato nessun indirizzo predefinito</ly-as-724862></p>
+        {% endif %}
+        <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+      </div>
+    </div>
+  </div>
+</div>

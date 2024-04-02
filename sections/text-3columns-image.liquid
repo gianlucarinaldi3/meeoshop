@@ -1,0 +1,98 @@
+{% assign title = section.settings.title %}
+{% assign text = section.settings.text %}
+{% assign image1 = section.settings.image_1 %}
+{% assign image2 = section.settings.image_2 %}
+{% assign image3 = section.settings.image_3 %}
+<div class="container">
+  <div class="wrap">
+    <div class="text">
+      {% if title != blank %}
+        <h2 class="h2 title">{{title}}</h2>
+      {% endif %}
+      {{text}}
+    </div>
+    <div class="images">
+      <div class="image">
+        <div class="spacer">
+          {% if image1 != blank %}
+            <img
+              src="{{ image1 | img_url: '1400x' }}"
+              alt="{{ image1.alt | escape }}"
+              loading="lazy"
+              width="1400"
+              height="700"
+            >
+          {% endif %}
+        </div>
+      </div>
+      <div class="image">
+        <div class="spacer">
+          {% if image2 != blank %}
+            <img
+              src="{{ image2 | img_url: '1400x' }}"
+              alt="{{ image2.alt | escape }}"
+              loading="lazy"
+              width="1400"
+              height="700"
+            >
+          {% endif %}
+        </div>
+      </div>
+      <div class="image">
+        <div class="spacer">
+          {% if image3 != blank %}
+            <img
+              src="{{ image3 | img_url: '1400x' }}"
+              alt="{{ image3.alt | escape }}"
+              loading="lazy"
+              width="1400"
+              height="700"
+            >
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Testo + 3 Immagini",
+  "class": "main-section section-images",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Testo"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Immagine 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Immagine 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Immagine 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testo + 3 Immagini",
+      "category": "Image"
+    }
+  ],
+  "templates": [
+    "page"
+  ]
+}
+{% endschema %}

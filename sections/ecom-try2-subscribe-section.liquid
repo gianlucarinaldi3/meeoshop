@@ -1,0 +1,122 @@
+{% comment %}
+ EComposer (https://ecomposer.io)
+ You SHOULD NOT modify source code in this page because
+ It is automatically generated from EComposer
+ {% endcomment %} 
+ 
+ {% assign ecom_root_url = routes.root_url %}
+ {% if ecom_root_url != '/'%}
+ {% assign ecom_root_url = routes.root_url | append: '/' %}
+ {% endif %}
+ <link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.4" /><noscript><link rel="stylesheet" media="all" id="ecom-vendors-css_ecomposer_base" href="https://cdn.ecomposer.app/vendors/css/ecom-base.css?v=1.4" /></noscript>
+{%- assign headless = true -%}{%- render "ecom_theme_helper" -%}{%capture section_id %}ecom-try2-subscribe-section{% endcapture%}{% if section and section_id == section.id and headless == true %}
+{{ content_for_header }}
+{% render 'ecom_header', ECOM_THEME: true %}{% endif %}<link href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/>
+{{'ecom-preview-template-section.css' | asset_url | stylesheet_tag }}
+<script src="{{'ecom-preview-template-section.js' | asset_url }}" defer="defer"></script>
+<script type="text/javascript" class="ecom-page-info">
+ window.EComposer = window.EComposer || {};
+ window.EComposer.TEMPLATE_ID="preview-template-section";
+ window.EComposer.SECTION = {"template_id":"preview-template-section","title":"try2 subscribe","type":"section","slug":"ecom-preview-section","plan_id":1};
+ </script>
+<div class="ecom-builder" id="ecom-try2-subscribe"><div class="ecom-sections" data-section-id="{{section.id}}"><section class="ecom-row ecom-core ecom-section ecom-zdeprx19p98" data-id="ecom-zdeprx19p98" style="z-index: inherit;"><div data-deep="1" class="core__row--columns"><div class="ecom-column ecom-core core__column--first ecom-latj7j2fkca"><div class="core__column--wrapper"><div class="core__blocks" index="0"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-o94ahxp9moa" data-core-is="block"><div class="ecom__element element__heading ecom-element ecom-html" data-stopdrag="true" deep="1"><h3 class="ecom__heading">{{ 'sections.ecom-try2-subscribe-section.headingtext_o94ahxp9moa_html' | t }}</h3></div></div><div class="ecom-block ecom-core core__block elmspace ecom-hsrigeinrlh" data-core-is="block"><div class="ecom-element ecom-shopify-elements ecom-shopify__newsletter-form" deep="1"><div class="ecom-shopify__newsletter-form-wrapper ecom-w__full"><div class="ecom-shopify__newsletter-form-container"><div>
+ {% form 'customer', action:'/contact', class: 'ecom-shopify__newsletter-form' ,id:'newsletter-form-ecom-hsrigeinrlh' %}
+ <input type="hidden" name="contact[tags]" value="newsletter" />
+ <div class="ecom-newsletter-form-content">
+ <input
+ id="ECom-NewsletterForm-ecom-hsrigeinrlh"
+ type="email"
+ name="contact[email]"
+ class="ecom-shopify__newsletter-form-field--input"
+ value="{{ form.email }}"
+ aria-required="true"
+ autocorrect="off"
+ autocapitalize="off"
+ autocomplete="email"
+ {% if form.errors %}
+ autofocus
+ aria-invalid="true"
+ {% endif %}
+ placeholder="Emaill adress"
+ required
+ >
+ <button type="submit" class="ecome-shopify__newsletter__button" name="commit">
+ <span> {{ 'sections.ecom-try2-subscribe-section.submit_title_hsrigeinrlh_html' | t }} </span>
+ <span class="ecom-shopify__newsletter__button-icon"> </span>
+ </button>
+ </div>
+ {%- if form.posted_successfully? or EComBuilderMode == true and false -%}
+ <div class="ecom-shopify__newsletter-form-success" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless %}>
+ {{ 'sections.ecom-try2-subscribe-section.success_message_hsrigeinrlh_html' | t }}
+ </div>
+ {%- endif -%}
+ {%- if form.errors or EComBuilderMode == true and false -%}
+ <div class="ecom-shopify__newsletter-form-message">
+ <h2 class="ecom-shopify__newsletter-form-status-error" role="alert" {% unless EComBuilderMode %}tabindex="-1" autofocus{% endunless %}>
+ {{ 'sections.ecom-try2-subscribe-section.error_title_hsrigeinrlh_html' | t }}
+ </h2>
+ <p class="ecom-shopify__newsletter-form-detail-error">
+ {% if EComBuilderMode %}
+ This is example error text when missing email field
+ {% endif %}
+ {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+ </p>
+ </div>
+ {%- endif -%}
+ <div class="ecom-shopify__newsletter-form-message ecom-dn">
+ <p class="ecom-shopify__newsletter-form-detail-error">
+ {{ 'sections.ecom-try2-subscribe-section.error_already_hsrigeinrlh_html' | t }}
+ </p>
+ </div>
+ {% endform %}
+ </div></div></div></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div><div class="ecom-column ecom-core ecom-3fmkil4fgms"><div class="core__column--wrapper"><div class="core__blocks" index="1"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-68ufntotz09" data-core-is="block"><div class="ecom__element ecom-element-button ecom-button-default" deep="1"><a class="ecom__element--button ecom-flex ecom-fl_center ecom-al_center" href="#"><span class="ecom__element--button-icon-text">{{ 'sections.ecom-try2-subscribe-section.buttoncontent_68ufntotz09_html' | t }}</span><span class="ecom-button-icon ecom__element--button-icon"></span></a></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div><div class="ecom-column ecom-core core__column--last ecom-inoajv3odo"><div class="core__column--wrapper"><div class="core__blocks" index="2"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-3lxq6vvkxbb" data-core-is="block"><div class="ecom__element element__heading ecom-element ecom-html" data-stopdrag="true" deep="1"><h3 class="ecom__heading">{{ 'sections.ecom-try2-subscribe-section.headingtext_3lxq6vvkxbb_html' | t }}</h3></div></div><div class="ecom-block ecom-core core__block ecom-8qku1d6fgh4" data-core-is="block"><div class="ecom__element ecom-element-button ecom-button-default" deep="1"><a class="ecom__element--button ecom-flex ecom-fl_center ecom-al_center" href="#"><span class="ecom__element--button-icon-text">{{ 'sections.ecom-try2-subscribe-section.buttoncontent_8qku1d6fgh4_html' | t }}</span><span class="ecom-button-icon ecom__element--button-icon"></span></a></div></div><div class="ecom-block ecom-core core__block ecom-9ynyqx8m88a" data-core-is="block"><div class="ecom__element ecom-element-button ecom-button-default" deep="1"><a class="ecom__element--button ecom-flex ecom-fl_center ecom-al_center" href="#"><span class="ecom__element--button-icon-text">{{ 'sections.ecom-try2-subscribe-section.buttoncontent_9ynyqx8m88a_html' | t }}</span><span class="ecom-button-icon ecom__element--button-icon"></span></a></div></div><div class="ecom-block ecom-core core__block ecom-k16jrj2gkk" data-core-is="block"><div class="ecom__element ecom-element-button ecom-button-default" deep="1"><a class="ecom__element--button ecom-flex ecom-fl_center ecom-al_center" href="#"><span class="ecom__element--button-icon-text">{{ 'sections.ecom-try2-subscribe-section.buttoncontent_k16jrj2gkk_html' | t }}</span><span class="ecom-button-icon ecom__element--button-icon"></span></a></div></div><div class="ecom-block ecom-core core__block ecom-74e0rm6yzje" data-core-is="block"><div class="ecom__element ecom-element-button ecom-button-default" deep="1"><a class="ecom__element--button ecom-flex ecom-fl_center ecom-al_center" href="#"><span class="ecom__element--button-icon-text">{{ 'sections.ecom-try2-subscribe-section.buttoncontent_74e0rm6yzje_html' | t }}</span><span class="ecom-button-icon ecom__element--button-icon"></span></a></div></div><div class="ecom-block ecom-core core__block ecom-wxdkytzr6" data-core-is="block"><div class="ecom__element ecom-element-button ecom-button-default" deep="1"><a class="ecom__element--button ecom-flex ecom-fl_center ecom-al_center" href="#"><span class="ecom__element--button-icon-text">{{ 'sections.ecom-try2-subscribe-section.buttoncontent_wxdkytzr6_html' | t }}</span><span class="ecom-button-icon ecom__element--button-icon"></span></a></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div></div><div class="ecom-section__overlay"><div class="ecom-overlay"></div></div></section><section class="ecom-row ecom-core ecom-section ecom-isj9dsmsadf" data-id="ecom-isj9dsmsadf" style="z-index: inherit;"><div data-deep="1" class="core__row--columns"><div class="ecom-column ecom-core core__column--first core__column--last ecom-4486fpndwr3"><div class="core__column--wrapper"><div class="core__blocks" index="0"><div class="core__blocks--body"><div class="ecom-block ecom-core core__block elmspace ecom-xja7f731kjj" data-core-is="block"><div class="ecom__element ecom-element element__text" data-stopdrag="" deep="1"><div class="text-content ecom-html has-drop-cap-view-default">{{ 'sections.ecom-try2-subscribe-section.textcontent_xja7f731kjj_html' | t }}</div></div></div></div></div></div><div class="ecom-column__overlay"><div class="ecom-overlay"></div></div></div></div><div class="ecom-section__overlay"><div class="ecom-overlay"></div></div></section>
+</div></div>
+{% schema %}
+{
+ "name": "try2 subscribe",
+ "locales": {
+ "it": {
+ "headingtext_o94ahxp9moa_html": "Subscribe to our newsletter<div><\/div>",
+ "submit_title_hsrigeinrlh_html": "Subscirbe",
+ "success_message_hsrigeinrlh_html": "Subscribed successfully!",
+ "error_title_hsrigeinrlh_html": "Opps!. An error has occurred",
+ "error_already_hsrigeinrlh_html": "Email have already subscribed!",
+ "buttoncontent_68ufntotz09_html": "Free Fonts Project",
+ "headingtext_3lxq6vvkxbb_html": "Follow us<div><\/div>",
+ "buttoncontent_8qku1d6fgh4_html": "in",
+ "buttoncontent_9ynyqx8m88a_html": "tw",
+ "buttoncontent_k16jrj2gkk_html": "fb",
+ "buttoncontent_74e0rm6yzje_html": "pi",
+ "buttoncontent_wxdkytzr6_html": "be",
+ "textcontent_xja7f731kjj_html": "\u00a9 EC \u2022 Powered by Shopify"
+ },
+ "en": {
+ "headingtext_o94ahxp9moa_html": "Subscribe to our newsletter<div><\/div>",
+ "submit_title_hsrigeinrlh_html": "Subscirbe",
+ "success_message_hsrigeinrlh_html": "Subscribed successfully!",
+ "error_title_hsrigeinrlh_html": "Opps!. An error has occurred",
+ "error_already_hsrigeinrlh_html": "Email have already subscribed!",
+ "buttoncontent_68ufntotz09_html": "Free Fonts Project",
+ "headingtext_3lxq6vvkxbb_html": "Follow us<div><\/div>",
+ "buttoncontent_8qku1d6fgh4_html": "in",
+ "buttoncontent_9ynyqx8m88a_html": "tw",
+ "buttoncontent_k16jrj2gkk_html": "fb",
+ "buttoncontent_74e0rm6yzje_html": "pi",
+ "buttoncontent_wxdkytzr6_html": "be",
+ "textcontent_xja7f731kjj_html": "\u00a9 EC \u2022 Powered by Shopify"
+ }
+ },
+ "settings": [
+ {
+ "type": "header",
+ "content": "The section was generated by [Ecomposer](https:\/\/ecomposer.io).",
+ "info": "\n EComposer is a Visual Page Builder app on Shopify AppStore.\n It provides 100+ pre-built templates in library,\n so you can build unlimited pages that you can imagine with it.\n "
+ },
+ {
+ "type": "header",
+ "content": "[EDIT WITH EComposer APP \u2192](https:\/\/ecomposer.app\/shop\/builder?page=section&id=preview-template-section&utm_source=theme-customize)",
+ "info": "(*You must install the app to start editing this section [Learn more](https:\/\/help.ecomposer.io\/docs\/getting-started\/installation\/))"
+ }
+ ]
+}
+{% endschema %}

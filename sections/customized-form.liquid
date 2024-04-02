@@ -1,0 +1,20 @@
+{% assign contact_title = section.settings.contact_title %}
+{% assign contact_text = section.settings.contact_text %}
+{% assign contact_image = section.settings.contact_image %}
+
+<div class="container">
+  <div class="wrap">
+    <div class="contact">
+      <h2 class="h2 title">{{ contact_title }}</h2>
+      {{ contact_text }}
+      {% if contact_image != blank %}
+        <div class="image">
+          <div class="spacer">
+            <img src="{{ contact_image | img_url: '800x' }}" alt="{{ contact_image.alt | escape }}" loading="lazy" width="800" height="1000">
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+

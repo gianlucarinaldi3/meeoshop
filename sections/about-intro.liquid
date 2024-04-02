@@ -1,0 +1,61 @@
+{% assign title = section.settings.title %}
+{% assign figcaption = section.settings.figcaption %}
+{% assign image = section.settings.image %}
+
+<div class="container">
+  <div class="wrap">
+    <div class="copy">
+      <h1 class="h1">{{title}}</h1>
+    </div>
+    {% if figcaption != blank %}
+      <div class="caption">
+        <p>{{figcaption}}</p>
+      </div>
+    {% endif %}
+    <div class="media">
+      <div class="spacer">
+        {% if image != blank %}
+          <img
+            src="{{ image | img_url: '1400x' }}"
+            alt="{{ image.alt | escape }}"
+            loading="lazy"
+            width="1400"
+            height="700"
+          >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "About Intro image",
+  "class": "main-section about-intro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "figcaption",
+      "label": "Didascalia Immagine"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Intro",
+      "category": "Image"
+    }
+  ],
+  "templates": [
+    "page","404"
+  ]
+}
+{% endschema %}

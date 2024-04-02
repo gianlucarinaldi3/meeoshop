@@ -1,0 +1,186 @@
+{% assign image = section.settings.image %}
+{% assign url = section.settings.link %}
+{% assign hotspots = '' | split: "," %}
+{% assign slides = '' | split: "," %}
+{% for block in section.blocks %}
+  {% assign currentKey = forloop.index | minus: 1 %}
+  {% assign currentKeyArray = currentKey | split: "," %}
+  {% if block.type == 'product' %}
+    {% assign slides = slides | concat: currentKeyArray %}
+  {% endif %}
+  {% if block.type == 'hotspot' %}
+    {% assign hotspots = hotspots | concat: currentKeyArray %}
+  {% endif %}
+{% endfor %}
+<div class="container" data-waypoint>
+  <div class="wrap">
+    {% if title != blank %}
+      <p class="title h1">{{title}}</p>
+    {% endif %}
+    <div class="media">
+      {% if hotspots.size == 0 %}
+        {% if url != blank %}
+          <a href="{{url}}" class="spacer">
+        {% else %}
+          <div class="spacer">
+        {% endif %}
+          {% if image != blank %}
+            <img
+              src="{{ image | img_url: '1400x' }}"
+              alt="{{ image.alt | escape }}"
+              loading="lazy"
+              width="1400"
+              height="700"
+            >
+          {% endif %}
+        {% if url != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="shoppable-image">
+          {% if url != blank %}
+            <a href="{{url}}" class="spacer">
+          {% else %}
+            <div class="spacer">
+          {% endif %}
+            {% if image != blank %}
+              <img
+                src="{{ image | img_url: '1400x' }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+                width="1400"
+                height="700"
+              >
+            {% endif %}
+          {% if url != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+          {% for blockKey in hotspots %}
+            {% assign currentKey = blockKey | minus: 0 %}
+            {% assign block = section.blocks[currentKey] %}
+            {% assign hotspot_product = all_products[block.settings.product] %}
+            {% if hotspot_product != empty %}
+              <div class="product" style="top:{{block.settings.y_axis}}%;left:{{block.settings.x_axis}}%;">
+                <span class="handle"></span>
+                <div class="card">
+                  <div class="card-inner">
+                    <a href="{{hotspot_product.url}}" class="img">
+                      {% if hotspot_product.featured_media %}
+                        <img
+                          src="{{ hotspot_product.featured_media | img_url: '100x130' }}"
+                          alt="{{ hotspot_product.featured_media.alt | escape }}"
+                          loading="lazy"
+                          width="100"
+                          height="130"
+                        >
+                      {% endif %}
+                    </a>
+                    <span class="content">
+                      <span class="top">
+                        <span class="name"><a href="{{hotspot_product.url}}">{{hotspot_product.title}}</a></span>
+                        {% render 'price', product: hotspot_product, price_class: 'price', tag: 'span' %}
+                      </span>
+                      <span class="bottom">
+                        <a href="{{hotspot_product.url}}" class="arrow-link">
+                          <ly-as-970136>Acquista</ly-as-970136>
+                          <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+                        </a>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    {% if slides.size > 0 %}
+      <div class="products-grid">
+        {% for blockKey in slides %}
+          {% assign currentKey = blockKey | minus: 0 %}
+          {% assign block = section.blocks[currentKey] %}
+          {% assign product = all_products[block.settings.product] %}
+          {% render 'product-card',
+            product: product
+          %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Combo immagine + prodotti",
+  "class": "main-section section-combo",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "id": "link",
+      "type": "url",
+      "label": "Url di destinazione"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Prodotto Hotspot",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "x_axis",
+          "label": "Horizontal axis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y_axis",
+          "label": "Vertical axis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Prodotto slide",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Combo immagine + prodotti",
+      "category": "Image"
+    }
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,120 @@
+{% assign alignment = section.settings.image_alignment %}
+<div class="container">
+  <div class="wrap image-{{alignment}}">
+    <div class="image">
+      <span class="img-spacer">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | img_url: '675x900' }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="675"
+            height="900"
+          >
+        {% endif %}
+      </span>
+    </div>
+    <div class="content">
+      <h2 class="h2 title">{{section.settings.title}}</h2>
+      <div class="rich-text">
+        {% for block in section.blocks %}
+          {% if block.type == 'title' %}
+            <h3>{{block.settings.text}}</h3>
+          {% endif %}
+          {% if block.type == 'text' %}
+            {{block.settings.text}}
+          {% endif %}
+          {% if block.type == 'cta' %}
+            <a href="{{block.settings.link}}" class="arrow-link">
+              {{block.settings.label}}
+              <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+            </a>
+          {% endif %}
+        {% endfor %}
+        {{section.settings.text}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testo + immagine",
+  "tag": "div",
+  "class": "main-section section-content",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    },
+    {
+      "id": "image",
+      "type": "image_picker",
+      "label": "Immagine",
+      "info": "Dimensioni consigliate: 675 x 900px"
+    },
+    {
+      "id": "image_alignment",
+      "type": "radio",
+      "label": "Allineamento immagine",
+      "options": [
+        {
+          "value": "left",
+          "label": "Sinistra"
+        },
+        {
+          "value": "right",
+          "label": "Destra"
+        }
+      ],
+      "default": "right"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Testo",
+      "settings": [
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Testo"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Titolo",
+      "settings": [
+        {
+          "id": "text",
+          "type": "text",
+          "label": "Titolo"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "Call to action",
+      "settings": [
+        {
+          "id": "label",
+          "type": "text",
+          "label": "Call to action"
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "label": "Url di destinazione"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testo + immagine"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+{% comment %}ly_liquid_scripts_begin{% endcomment %}{% capture ly_liquid_content %}{% comment %}ly_liquid_scripts_end{% endcomment %}<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{%- assign language_code = '_' | append: request.locale.iso_code -%}{%- if '_ar_he_fa_ur' contains language_code -%} dir="rtl" {%- endif -%}{% comment %}ly_dir_replace_end{% endcomment %}>
+  <head>
+ {%- render 'ecom_header' -%}
+	{% include "pandectes-rules" %}
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MVT3QHV');</script>
+<!-- End Google Tag Manager -->
+<meta name="p:domain_verify" content="f47eac381f00843a083888b7f43430e7"/>
+<meta name="google-site-verification" content="DvoT8rQjHcj044YtJqJ1ZKAgZu-ZlTFO-m0IDenGrqA" />
+<meta name="facebook-domain-verification" content="8wxqk3bifjycrkdtxqh5yemfxt3veu" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  	<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100;200;300;400;500;600;700;800;900&family=Fraunces:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="{{ 'modernizr.js' | asset_url }}"></script>
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+  	<script src="{{ 'jquery-3.3.1.min.js' | asset_url }}"></script>
+    {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+    <script src="{{ 'jquery.validate.min.js' | asset_url }}"></script>
+    <script src="{{ 'swiper.min.js' | asset_url }}"></script>
+    <script src="{{ 'jquery-ui.min.js' | asset_url }}"></script>
+    <script src="{{ 'fancybox.umd.js' | asset_url }}"></script>
+    <script src="{{ 'jquery.waypoints.min.js' | asset_url }}"></script>
+    <script src="{{ 'masonry.pkgd.min.js' | asset_url }}"></script>
+    <script src="{{ 'app.js' | asset_url }}"></script>
+    {{ content_for_header }}
+    {{ 'fancybox.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+    {% if settings.custom_scripts_head != blank %}
+      {% unless settings.custom_scripts_head contains '<script' %}<script>{% endunless %}
+        {{ settings.custom_scripts_head }}
+      {% unless settings.custom_scripts_head contains '<script' %}</script>{% endunless %}
+    {% endif %}
+  {% comment %}ly_dir_styles_begin{% endcomment %}{%- assign language_code = '_' | append: request.locale.iso_code -%}{%- if '_ar_he_fa_ur' contains language_code -%}{{- 'ly-rtl.css' | asset_url | stylesheet_tag -}}{%- endif -%}{% comment %}ly_dir_styles_end{% endcomment %}{% capture boostersnippet %}{% include "booster-apps-common" %}{% endcapture %}{% unless boostersnippet contains "Liquid error" %}{{ boostersnippet }}{% endunless %}
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "fnhgfq3v1g");
+</script>
+
+    
+
+  {% render 'shogun-head' %}
+</head> 
+  <body{% if template contains 'index' or template contains 'product.special' %} class="home"{% endif %}>
+   <!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MVT3QHV"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) --> 
+    {% section 'eg-bar' %}
+    {% section 'announcement-bar' %}
+    <div id="body">
+      {% section 'header' %}
+      <main id="page" role="main" tabindex="-1">
+        {{ content_for_layout }}
+      </main>
+      {% section 'footer' %}
+    </div>
+    {% comment %}
+    {% section 'bg' %}
+    {% endcomment %}
+    
+    {% if settings.custom_styles != blank %}
+      {% unless settings.custom_styles contains '<style' %}<style>{% endunless %}
+        {{ settings.custom_styles }}
+      {% unless settings.custom_styles contains '<style' %}</style>{% endunless %}
+    {% endif %}
+
+    {% if settings.custom_scripts_footer != blank %}
+      {% unless settings.custom_scripts_footer contains '<script' %}<script>{% endunless %}
+        {{ settings.custom_scripts_footer }}
+      {% unless settings.custom_scripts_footer contains '<script' %}</script>{% endunless %}
+    {% endif %}
+  {% if content_for_header contains "dev.giftkart.app" %}{% include "giftkart_script.cart" %}{% endif %}<!-- langify-v2-scripts-begin -->{% comment %}ly_liquid_scripts_begin{% endcomment %}{% endcapture %}{% render 'ly-liquid-scripts' content: ly_liquid_content %}{% comment %}ly_liquid_scripts_end{% endcomment %}{% comment %}ly_core_scripts_begin{% endcomment %}{% render 'ly-core-scripts' %}{% comment %}ly_core_scripts_end{% endcomment %}{% comment %}ly_switcher_factory_begin{% endcomment %}{% render 'ly-switcher-factory' %}{% comment %}ly_switcher_factory_end{% endcomment %}<!-- langify-v2-scripts-end -->{%- render "ecom_footer"-%}</body>
+</html>

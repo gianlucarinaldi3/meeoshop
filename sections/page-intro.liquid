@@ -1,0 +1,38 @@
+{% assign title = section.settings.title %}
+{% assign text = section.settings.text %}
+<div class="container">
+  <div class="outer">
+    <div class="inner">
+      <h1 class="h1 title">{{ title }}</h1>
+      {%- if text -%}
+        <div class="summary">{{ text }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Intro Pagina",
+  "class": "section-page-intro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Testo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Intro Pagina"
+    }
+  ],
+  "templates": [
+    "page"
+  ]
+}
+{% endschema %}

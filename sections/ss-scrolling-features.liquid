@@ -1,0 +1,342 @@
+<style>
+  @keyframes carousel {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .usp {
+    overflow: hidden;
+    --section-padding: 20px;
+    padding: var(--section-padding) 0;
+  }
+  @media (min-width: 1024px) {
+    .usp {
+      --section-padding: 30px;
+    }
+  }
+  .usp__inner {
+    --container-padding: 15px;
+    width: 100%;
+    max-width: calc(1800px + var(--container-padding)*2);
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+  .usp__inner.usp__inner--desktop {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .usp__inner.usp__inner--desktop {
+      display: block;
+    }
+    .usp__inner.usp__inner--mobile {
+      display: none;
+    }
+  }
+  .usp__inner--mobile {
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+  }
+  .usp__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    margin: 0;
+    margin-top: calc(var(--grid-gap)*-1);
+    margin-left: calc(var(--grid-gap)*-1);
+  }
+  .usp__item {
+    --grid-gap: 10px;
+    margin: 0;
+    {% comment %} margin-top: var(--grid-gap); {% endcomment %}
+    margin-left: var(--grid-gap);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .usp__item--desktop {
+    min-width: calc(33.3333% - var(--grid-gap));
+  }
+  .usp__item__icon {
+    display: flex;
+    margin: 0;
+    margin-right: 15px;
+  }
+  .usp__item__icon img,
+  .usp__item__icon svg  {
+    width: var(--icon-size, 32px);
+    height: var(--icon-size, 32px);
+  }
+  .usp__list--mobile {
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+  }
+  .usp__item--mobile {
+    flex-shrink: 0;
+    margin-right: 50px;
+  }
+  .usp__item__text {
+    margin:0;
+    font-size: var(--font-size, 16px);
+    color: var(--color-text);
+  }
+  .usp__list--carousel {
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+
+    animation: carousel infinite linear;
+    animation-duration: 25s;
+  }
+  @media (max-width: 768px) {
+    .usp__list--carousel {
+      animation-duration: 28s;
+    }
+  }
+</style>
+
+{% capture svg_example_1 %}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" class="bi bi-box2" viewBox="0 0 16 16">
+    <path d="M2.95.4a1 1 0 0 1 .8-.4h8.5a1 1 0 0 1 .8.4l2.85 3.8a.5.5 0 0 1 .1.3V15a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4.5a.5.5 0 0 1 .1-.3L2.95.4ZM7.5 1H3.75L1.5 4h6V1Zm1 0v3h6l-2.25-3H8.5ZM15 5H1v10h14V5Z"/>
+  </svg>
+{% endcapture %}
+{% capture svg_example_2 %}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+  </svg>
+{% endcapture %}
+{% capture svg_example_3 %}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" class="bi bi-heart" viewBox="0 0 16 16">
+    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+  </svg>
+{% endcapture %}
+
+<section
+  class="usp"
+  style="
+    --font-size: {{ section.settings.font_size }}px;
+    --color-text: {{ section.settings.color_text }};
+    --icon-size: {{ section.settings.icon_size }}px;
+    {% if section.settings.border_bottom %}
+      border-bottom: 1px solid hsl(0, 0%, 90%);
+    {% endif %}
+    {% if section.settings.border_top %}
+      border-top: 1px solid hsl(0, 0%, 90%);
+    {% endif %}
+    margin-top: {{ section.settings.padding_top }}px;
+    margin-bottom: {{ section.settings.padding_bottom }}px;
+    background-color:{{section.settings.background-color}};
+  "
+>
+  <div class="usp__inner usp__inner--desktop">
+    <ul class="usp__list usp__list--desktop {% if section.settings.scroll_on_desktop %}usp__list--carousel{% endif %}">
+      {% capture desktop_elements %}
+        {% for block in section.blocks %}
+          <li class="usp__item usp__item--desktop">
+            <figure class="usp__item__icon">
+              {% if block.settings.image != blank %}
+              <img
+                src="{{ block.settings.image | img_url: 'medium' }}"
+                alt="{{ block.settings.image.alt }}"
+              >
+              {% else %}
+                {% case forloop.index %}
+                  {% when 1 %}
+                    {{ svg_example_1 }}
+                  {% when 2 %}
+                    {{ svg_example_2 }}
+                  {% when 3 %}
+                    {{ svg_example_3 }}
+                  {% else %}
+                    {{ svg_example_1 }}
+                {% endcase %}
+              {% endif %}
+            </figure>
+    
+            <p class="usp__item__text">{{ block.settings.text }}</p>
+          </li>  
+          {% endfor %}
+      {% endcapture %}
+      {{ desktop_elements }}
+      {% if section.settings.scroll_on_desktop %}
+        {{ desktop_elements }}
+      {% endif %}
+    </ul>
+  </div>
+  <div class="usp__inner usp__inner--mobile">
+    {% capture mobile_elements %}
+    <ul
+      class="usp__list usp__list--mobile usp__list--carousel"
+      style="justify-content: flex-start;"
+    >
+      {% for block in section.blocks %}
+        <li class="usp__item usp__item--mobile ">
+          <figure class="usp__item__icon">
+            {% if block.settings.image != blank %}
+            <img
+              src="{{ block.settings.image | img_url: 'medium' }}"
+              alt="{{ block.settings.image.alt }}"
+            >
+            {% else %}
+              {% case forloop.index %}
+                {% when 1 %}
+                  {{ svg_example_1 }}
+                {% when 2 %}
+                  {{ svg_example_2 }}
+                {% when 3 %}
+                  {{ svg_example_3 }}
+                {% else %}
+                  {{ svg_example_1 }}
+              {% endcase %}
+            {% endif %}
+          </figure>
+  
+          <p class="usp__item__text">{{ block.settings.text }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endcapture %}
+    {{ mobile_elements }}
+    {{ mobile_elements }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Scrolling features",
+  "presets": [
+    {
+      "category": "Custom",
+      "name": "Scrolling features",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping on orders over $100"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "30 days return policy"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "24/7 customer support"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "scroll_on_desktop",
+      "label": "Scroll on desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 64,
+      "step": 1,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "border_bottom",
+      "label": "Border bottom",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "border_top",
+      "label": "Border top",
+      "default": false
+    },
+      {
+        "type": "header",
+        "content": "Background color"
+      },
+      {
+  	  "type": "color",
+  	  "label": "Section background color",
+  	  "id": "background-color",
+  	  "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Section padding"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 8
+      },
+      {
+           "type": "range",
+           "id": "padding_bottom",
+           "min": 0,
+           "max": 100,
+           "step": 4,
+           "unit": "px",
+           "label": "Padding bottom",
+           "default": 8
+      }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

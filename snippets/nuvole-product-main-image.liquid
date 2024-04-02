@@ -1,0 +1,23 @@
+{% assign main_images_keys = 1 | split: "," %}
+
+<div class="main-image">
+  <div class="slider">
+    <div class="slider-wrapper">
+      {% for key in main_images_keys %}
+        {% assign _key = key | plus:0 %}
+        {% assign media = product.media[_key] %}
+        {% assign padding = 100 | divided_by: media.aspect_ratio %}
+        <div class="slide">
+          <a href="{{ media | img_url: 'master' }}" class="img img-spacer" data-fancybox="product-gallery" style="padding-top:{{padding}}%">
+            <img
+              src="{{ media | img_url: '1200x' }}"
+              alt="{{ media.alt | escape }}"
+              width="1200"
+            />
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <span class="slider-pager"></span>
+</div>

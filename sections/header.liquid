@@ -1,0 +1,253 @@
+<header id="header">
+  <div class="container">
+    <div class="bar">
+      {% if request.page_type == 'index' %}
+        <h1 class="logo">
+          <a href="{{ routes.root_url }}">
+            {% render 'logo' %}
+          </a>
+        </h1>
+      {% else %}
+        <a href="{{ routes.root_url }}" class="logo">
+          {% render 'logo' %}
+        </a>
+      {% endif %}
+      <div class="actions">
+        {% if section.settings.quick_links_desktop != blank %}
+          <ul class="links">
+            {% for link in section.settings.quick_links_desktop.links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <div class="search">
+          <span class="handle"><svg class="icon"><use xlink:href="#icon-search"></use></svg></span>
+          <form class="form" data-autocomplete-url="{{ routes.search_url }}?view=header&options[prefix]=last" action="{{ routes.search_url }}" method="get" role="search">
+            <input type="hidden" name="options[prefix]" value="last">
+            <input name="q" type="text" placeholder="Cosa stai cercando?" />
+            <button type="submit"><svg class="icon"><use xlink:href="#icon-search"></use></svg></button>
+            {% if section.settings.quick_links_search != blank %}
+              <div class="quick-menu">
+                <p class="title"><ly-as-719142>Naviga il catalogo</ly-as-719142></p>
+                <ul>
+                  {% for link in section.settings.quick_links_search.links %}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </form>
+        </div>
+        <span class="ly-custom-1000"></span>
+        <span class="ly-custom-0"></span>
+        <ul class="account">
+          {% if shop.customer_accounts_enabled %}
+            <li>
+              <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+                {% liquid
+                  if customer
+                    echo 'customer.account_fallback' | t
+                  else
+                    echo 'customer.log_in' | t
+                  endif
+                %}
+              </a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="{{ routes.cart_url }}">
+              <ly-as-719143>Il tuo ordine</ly-as-719143>
+              {% if cart != empty %}
+                <em class="filled">{{cart.item_count}}</em>
+              {% else %}
+                <em>0</em>
+              {% endif %}
+            </a>
+          </li>
+        </ul>
+        <a class="cart-handle {% if cart != empty %} filled {% endif %}" href="{{ routes.cart_url }}">{{cart.item_count}}</a>
+        <span class="menu-handle"></span>
+      </div>
+    </div>
+  </div>
+  <div id="menu">
+    <div class="container">
+      <span class="close"></span>
+      <div class="outer">
+        <div class="inner">
+          <div class="collections-slider">
+            <div class="heading">
+              <h2 class="h1 title"><ly-as-719144>Collezioni</ly-as-719144></h2>
+              <p class="link">
+                <a href="{{ routes.all_products_collection_url }}" class="arrow-link">
+                  <ly-as-719145>Tutte le collezioni</ly-as-719145>
+                  <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+                </a>
+              </p>
+            </div>
+            <div class="slider">
+              <div class="slider-wrapper">
+                {% for block in section.blocks %}
+                  <div class="collection">
+                    <a href="{{block.settings.url}}">
+                      <span class="img">
+                        <img
+                          src="{{ block.settings.image | img_url: '400x520' }}"
+                          alt="{{ block.settings.image.alt | escape }}"
+                          loading="lazy"
+                          width="400"
+                          height="520"
+                        >
+                      </span>
+                      <span class="name">
+                        {{block.settings.title}}
+                        <svg class="icon"><use xlink:href="#icon-link"></use></svg>
+                      </span>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="slider-scrollbar"></div>
+            </div>
+          </div>
+          {% if section.settings.main_links != blank %}
+            <ul class="main-links">
+              {% for link in section.settings.main_links.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <div class="bottom-links">
+            {% if section.settings.bottom_links_01 != blank %}
+              <ul>
+                {% for link in section.settings.bottom_links_01.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if section.settings.bottom_links_02 != blank %}
+              <ul>
+                {% for link in section.settings.bottom_links_02.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if section.settings.bottom_links_03 != blank %}
+              <ul>
+                {% for link in section.settings.bottom_links_03.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+
+{% if request.page_type == 'index' %}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "quick_links_desktop",
+      "label": "Quick links Desktop"
+    },
+    {
+      "type": "link_list",
+      "id": "quick_links_search",
+      "label": "Quick links Ricerca"
+    },
+    {
+      "type": "link_list",
+      "id": "main_links",
+      "label": "Menu Principale"
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_links_01",
+      "label": "Menu secondario - 01"
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_links_02",
+      "label": "Menu secondario - 02"
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_links_03",
+      "label": "Menu secondario - 03"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collezione",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titolo"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sottotitolo"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Immagine"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Url"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

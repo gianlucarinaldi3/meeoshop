@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="section-heading">
+    <h2 class="h2 section-title"><ly-as-719146>Instagram</ly-as-719146></h2>
+    <div class="section-link">
+      <a href="https://www.instagram.com/{{section.settings.instagram_account}}/" class="arrow-link" target="_blank">
+        <ly-as-719147>Seguici</ly-as-719147>
+        <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+      </a>
+    </div>
+  </div>
+  <div class="social-widget-wrapper" data-widget-id="39695"></div>
+</div>
+
+{% schema %}
+{
+  "name": "Da instagram",
+  "class": "main-section section-instagram section-painted",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo sezione",
+      "default": "Instagram"
+    },
+    {
+      "type": "text",
+      "id": "instagram_account",
+      "label": "Instagram account"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Da instagram",
+      "category": "Image"
+    }
+  ],
+  "templates": [
+    "index"
+  ]
+}
+
+{% endschema %}

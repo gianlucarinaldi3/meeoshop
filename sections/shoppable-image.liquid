@@ -1,0 +1,231 @@
+{% assign textbox_text = section.settings.textbox_text %}
+{% assign textbox_cta = section.settings.textbox_button_label %}
+{% assign textbox_link = section.settings.textbox_button_link %}
+{% assign sidebox_text = section.settings.sidebox_text %}
+{% assign sidebox_cta = section.settings.sidebox_button_label %}
+{% assign sidebox_link = section.settings.sidebox_button_link %}
+{% assign image = section.settings.image %}
+  <div class="container">
+    <div class="wrap">
+      {% if textbox_text != blank %}
+        <div class="copy" data-waypoint>
+          <p class="h1">{{textbox_text}}</p>
+          {% if textbox_link != blank and textbox_cta != blank %}
+            <a href="{{textbox_link}}" class="arrow-link">
+              {{textbox_cta}}
+              <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if sidebox_text != blank %}
+        <div class="caption" data-waypoint>
+          <p>{{sidebox_text}}</p>
+          {% if sidebox_link != blank and sidebox_cta != blank %}
+            <a href="{{sidebox_link}}" class="arrow-link">
+              {{sidebox_cta}}
+              <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="media" data-waypoint>
+        {% if section.blocks.size == 0 %}
+          <div class="spacer">
+            {% if image != blank %}
+<picture>
+  <source media="(max-width:750px)" srcset="{{ image | image_url: width: 620 }}">
+  <source media="(min-width:750px)" srcset="{{ image | image_url: width: 1220 }}">
+  <img alt="{{ image.alt | escape }}" width="1400" height="700" loading="lazy">
+</picture>
+              {% comment %}
+              <img
+                src="{{ image | img_url: '1400x' }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+                width="1400"
+                height="700"
+              >
+              {% endcomment %}
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="shoppable-image">
+            <div class="spacer">
+              {% if image != blank %}
+<picture>
+  <source media="(max-width:750px)" srcset="{{ image | image_url: width: 620 }}">
+  <source media="(min-width:750px)" srcset="{{ image | image_url: width: 1220 }}">
+  <img alt="{{ image.alt | escape }}" width="1400" height="700" loading="lazy">
+</picture>
+                {% comment %}
+                <img
+                  src="{{ image | img_url: '1400x' }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="1400"
+                  height="700"
+                >
+                {% endcomment %}
+              {% endif %}
+            </div>
+            {% for block in section.blocks %}
+              {% assign hotspot_product = all_products[block.settings.product] %}
+              {% if hotspot_product != empty %}
+                <div class="product" style="top:{{block.settings.y_axis}}%;left:{{block.settings.x_axis}}%;">
+                  <span class="handle"></span>
+                  <div class="card">
+                    <div class="card-inner">
+                      <a href="{{hotspot_product.url}}" class="img">
+                        {%- if hotspot_product.featured_media -%}
+                          <img
+                            src="{{ hotspot_product.featured_media | img_url: '100x130' }}"
+                            alt="{{ hotspot_product.featured_media.alt | escape }}"
+                            loading="lazy"
+                            width="100"
+                            height="130"
+                          >
+                        {%- endif -%}
+                      </a>
+                      <span class="content">
+                        <span class="top">
+                          <span class="name"><a href="{{hotspot_product.url}}">{{hotspot_product.title}}</a></span>
+                          {% render 'price', product: hotspot_product, price_class: 'price', tag: 'span' %}
+                        </span>
+                        <span class="bottom">
+                          <a href="{{hotspot_product.url}}" class="arrow-link">
+                            Acquista
+                            <svg class="arrow"><use xlink:href="#icon-link"></use></svg>
+                          </a>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+{
+  "name": "Shoppable image",
+  "class": "main-section section-story",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Contenuto principale"
+    },
+    {
+      "type": "text",
+      "id": "textbox_text",
+      "label": "Testo"
+    },
+    {
+      "type": "text",
+      "id": "textbox_button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "textbox_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Contenuto secondario"
+    },
+    {
+      "type": "text",
+      "id": "sidebox_text",
+      "label": "Testo"
+    },
+    {
+      "type": "text",
+      "id": "sidebox_button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "sidebox_button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "x_axis",
+          "label": "Horizontal axis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y_axis",
+          "label": "Vertical axis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable image",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "x_axis": 10,
+            "y_axis": 65
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "x_axis": 25,
+            "y_axis": 30
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "x_axis": 85,
+            "y_axis": 55
+          }
+        }
+      ]
+    }
+  ],
+  "templates": [
+    "index",
+    "product"
+  ]
+}
+
+{% endschema %}

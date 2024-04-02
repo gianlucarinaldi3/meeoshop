@@ -1,0 +1,66 @@
+{% assign show_everywhere = false %}
+{% assign homepage_only = false %}
+{% if section.settings.show_announcement and section.settings.homepage_announcement == false %}
+  {% assign show_everywhere = true %}
+{% endif %}
+{% if section.settings.show_announcement and section.settings.homepage_announcement and template == 'index' %}
+  {% assign homepage_only = true %}
+{% endif %}
+{% if show_everywhere or homepage_only %}
+  {% if section.settings.announcement_text != blank %}
+    <div class="announcement-bar" role="region" {{ block.shopify_attributes }}>
+      {% if section.settings.announcement_link != blank %}
+        <a href="{{ section.settings.announcement_link }}">
+      {% endif %}
+      <p id="notice">
+        <span{% if section.settings.announcement_text_mobile != blank %} class="desktop"{% endif %}>{{ section.settings.announcement_text }}</span>
+        {% if section.settings.announcement_text_mobile != blank %}
+          <span class="mobile">{{ section.settings.announcement_text_mobile }}</span>
+        {% endif %}
+      </p>
+      {% if section.settings.announcement_link != blank %}
+      </a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement"
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_announcement",
+      "label": "Show on home page only"
+    },
+    {
+      "id": "announcement_text",
+      "type": "textarea",
+      "label": "Text",
+      "default": "Announce something here"
+    },
+    {
+      "id": "announcement_text_mobile",
+      "type": "textarea",
+      "label": "Text (mobile)",
+      "info": "Use this option if you want to display alternate text in mobile. Recommended for shortening announcement text to make suitable for mobile."
+    },
+    {
+      "id": "announcement_link",
+      "type": "url",
+      "label": "Link"
+    }
+  ]
+}
+
+{% endschema %}
